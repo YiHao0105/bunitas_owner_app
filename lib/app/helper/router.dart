@@ -75,6 +75,7 @@ import 'package:ultimate_salon_owner_flutter/app/view/inbox.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/individual_categories.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/individual_cities.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/individual_profile.dart';
+import 'package:ultimate_salon_owner_flutter/app/view/intro_slider.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/languages.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/login.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/order_details.dart';
@@ -106,6 +107,7 @@ import '../view/treatment_categories.dart';
 
 class AppRouter {
   static const String initial = '/';
+  static const String introSliderPage = '/introSliderPage';
   static const String verifyRoutes = '/verify';
   static const String signUpRoutes = '/signup';
   static const String tabRoutes = '/tabs';
@@ -142,7 +144,8 @@ class AppRouter {
   static const String servicesCategoriesRoutes = '/services_categories';
   static const String packagesSpecialistRoutes = '/packages_specialist';
   static const String individualProfileRoutes = '/individual_profile';
-  static const String individualProfileCategoriesRoutes = '/individual_profile_categories';
+  static const String individualProfileCategoriesRoutes =
+      '/individual_profile_categories';
   static const String individualCitiesRoutes = '/individual_cities';
   static const String errorRoutes = '/error';
   static const String splash = '/splash';
@@ -154,9 +157,8 @@ class AppRouter {
   static const String displayRoutes = '/display_image';
   static const String treatmentCategoriesRoutes = '/treatment_categories';
 
-
-
   static String getTreatmentCategoriesRoute() => treatmentCategoriesRoutes;
+  static String getIntroSliderPage() => introSliderPage;
   static String getInitialRoute() => initial;
   static String getVerifyRoute() => verifyRoutes;
   static String getSignUpRoute() => signUpRoutes;
@@ -194,7 +196,8 @@ class AppRouter {
   static String getServicesCategoriesRoute() => servicesCategoriesRoutes;
   static String getPackagesSpecialistRoute() => packagesSpecialistRoutes;
   static String getIndividualProfileRoute() => individualProfileRoutes;
-  static String getIndividualProfileCategoriesRoute() => individualProfileCategoriesRoutes;
+  static String getIndividualProfileCategoriesRoute() =>
+      individualProfileCategoriesRoutes;
   static String getIndividualCitiesRoute() => individualCitiesRoutes;
   static String getErrorRoutes() => errorRoutes;
   static String getSplashRoutes() => splash;
@@ -205,57 +208,201 @@ class AppRouter {
   static String getPolicyRoute() => policyRoutes;
   static String getDisplayRoute() => displayRoutes;
 
-
   static List<GetPage> routes = [
-    GetPage(name: initial, page: () => const LoginScreen(), binding: LoginBinding()),
-    GetPage(name: verifyRoutes, page: () => const VerifyScreen(), binding: VerifyBinding()),
-    GetPage(name: signUpRoutes, page: () => const SignUpScreen(), binding: SignUpBinding()),
-    GetPage(name: tabRoutes, page: () => const TabScreen(), binding: TabsBinding()),
-    GetPage(name: appointmentRoutes, page: () => const AppointmentScreen(), binding: AppointmentBinding()),
-    GetPage(name: calendarRoutes, page: () => const CalendarScreen(), binding: CalendarsBinding()),
-    GetPage(name: inboxRoutes, page: () => const InboxScreen(), binding: InboxBinding()),
-    GetPage(name: profileRoutes, page: () => const ProfileScreen(), binding: ProfileBinding()),
-    GetPage(name: orderDetailsRoutes, page: () => const OrderDetailsScreen(), binding: OrderDetailsBinding()),
-    GetPage(name: chatRoutes, page: () => const ChatScreen(), binding: ChatBinding()),
-    GetPage(name: historyRoutes, page: () => const HistoryScreen(), binding: HistoryBinding()),
-    GetPage(name: stylistRoutes, page: () => const StylistScreen(), binding: StylistBinding()),
-    GetPage(name: addStylistRoutes, page: () => const AddStylistScreen(), binding: AddStylistBinding()),
-    GetPage(name: stylistCategoriesRoutes, page: () => const StylistCategoriesScreen(), binding: StylistCategoriesBinding()),
-    GetPage(name: profileCategoriesRoutes, page: () => const ProfileCategoriesScreen(), binding: ProfileCategoriesBinding()),
-    GetPage(name: addTimingRoutes, page: () => const AddTimingScreen(), binding: AddTimingBinding(), fullscreenDialog: true),
-    GetPage(name: gallaryRoutes, page: () => const GallaryScreen(), binding: GallaryBinding()),
-    GetPage(name: reviewRoutes, page: () => const ReviewScreen(), binding: ReviewBinding()),
-    GetPage(name: reviewRoutes, page: () => const ReviewScreen(), binding: ReviewBinding()),
-    GetPage(name: languagesRoutes, page: () => const LanguagesScreen(), binding: LanguagesBinding()),
-    GetPage(name: contactUsRoutes, page: () => const ContactUsScreen(), binding: ContactUsBinding()),
-    GetPage(name: appPagesRoutes, page: () => const AppPagesScreen(), binding: AppPagesBinding()),
-    GetPage(name: packagesRoutes, page: () => const PackagesScreen(), binding: PackagesBinding()),
-    GetPage(name: addPackagesRoutes, page: () => const AddPackagesScreen(), binding: AddPackagesBinding()),
-    GetPage(name: packagesCategoriesRoutes, page: () => const PackagesCategoriesScreen(), binding: PackagesCategoriesBinding()),
-    GetPage(name: productsRoutes, page: () => const ProductsScreen(), binding: ProductsBinding()),
-    GetPage(name: createProductsRoutes, page: () => const CreateProductsScreen(), binding: CretaeProductsBinding()),
-    GetPage(name: shopCategoriesRoutes, page: () => const ShopCategoriesScreen(), binding: ShopCategoriesBinding()),
-    GetPage(name: shopSubCategoriesRoutes, page: () => const ShopSubCategoriesScreen(), binding: ShopSubCategoriesBinding()),
-    GetPage(name: salonCategoriesRoutes, page: () => const SalonCategoriesScreen(), binding: SalonCategoriesBinding()),
-    GetPage(name: citiesCategoriesRoutes, page: () => const CitiesCategoriesScreen(), binding: CitiesCategoriesBinding()),
-    GetPage(name: slotRoutes, page: () => const SlotScreen(), binding: SlotBinding()),
-    GetPage(name: addSlotRoutes, page: () => const AddSlotScreen(), binding: AddSlotBinding()),
-    GetPage(name: addServicesRoutes, page: () => const AddServicesScreen(), binding: AddServicesBinding()),
-    GetPage(name: servicesRoutes, page: () => const ServicesScreen(), binding: ServicesBinding()),
-    GetPage(name: servicesCategoriesRoutes, page: () => const ServiceCategoriesScreen(), binding: ServicesCategoriesBinding()),
-    GetPage(name: packagesSpecialistRoutes, page: () => const PackagesSpecialistScreen(), binding: PackagesSpecialistBinding()),
-    GetPage(name: individualProfileRoutes, page: () => const IndividualProfileScreen(), binding: IndividualProfileBinding()),
-    GetPage(name: individualProfileCategoriesRoutes, page: () => const IndividualCategoriesScreen(), binding: IndividualProfileCategoriesBinding()),
-    GetPage(name: individualCitiesRoutes, page: () => const IndividualCitiesScreen(), binding: IndividualCitiesBinding()),
+    GetPage(
+        name: initial,
+        page: () => const LoginScreen(),
+        binding: LoginBinding()),
+        GetPage(name: introSliderPage, page: () =>  IntroSlider()),
+    GetPage(
+        name: verifyRoutes,
+        page: () => const VerifyScreen(),
+        binding: VerifyBinding()),
+    GetPage(
+        name: signUpRoutes,
+        page: () => const SignUpScreen(),
+        binding: SignUpBinding()),
+    GetPage(
+        name: tabRoutes, page: () => const TabScreen(), binding: TabsBinding()),
+    GetPage(
+        name: appointmentRoutes,
+        page: () => const AppointmentScreen(),
+        binding: AppointmentBinding()),
+    GetPage(
+        name: calendarRoutes,
+        page: () => const CalendarScreen(),
+        binding: CalendarsBinding()),
+    GetPage(
+        name: inboxRoutes,
+        page: () => const InboxScreen(),
+        binding: InboxBinding()),
+    GetPage(
+        name: profileRoutes,
+        page: () => const ProfileScreen(),
+        binding: ProfileBinding()),
+    GetPage(
+        name: orderDetailsRoutes,
+        page: () => const OrderDetailsScreen(),
+        binding: OrderDetailsBinding()),
+    GetPage(
+        name: chatRoutes,
+        page: () => const ChatScreen(),
+        binding: ChatBinding()),
+    GetPage(
+        name: historyRoutes,
+        page: () => const HistoryScreen(),
+        binding: HistoryBinding()),
+    GetPage(
+        name: stylistRoutes,
+        page: () => const StylistScreen(),
+        binding: StylistBinding()),
+    GetPage(
+        name: addStylistRoutes,
+        page: () => const AddStylistScreen(),
+        binding: AddStylistBinding()),
+    GetPage(
+        name: stylistCategoriesRoutes,
+        page: () => const StylistCategoriesScreen(),
+        binding: StylistCategoriesBinding()),
+    GetPage(
+        name: profileCategoriesRoutes,
+        page: () => const ProfileCategoriesScreen(),
+        binding: ProfileCategoriesBinding()),
+    GetPage(
+        name: addTimingRoutes,
+        page: () => const AddTimingScreen(),
+        binding: AddTimingBinding(),
+        fullscreenDialog: true),
+    GetPage(
+        name: gallaryRoutes,
+        page: () => const GallaryScreen(),
+        binding: GallaryBinding()),
+    GetPage(
+        name: reviewRoutes,
+        page: () => const ReviewScreen(),
+        binding: ReviewBinding()),
+    GetPage(
+        name: reviewRoutes,
+        page: () => const ReviewScreen(),
+        binding: ReviewBinding()),
+    GetPage(
+        name: languagesRoutes,
+        page: () => const LanguagesScreen(),
+        binding: LanguagesBinding()),
+    GetPage(
+        name: contactUsRoutes,
+        page: () => const ContactUsScreen(),
+        binding: ContactUsBinding()),
+    GetPage(
+        name: appPagesRoutes,
+        page: () => const AppPagesScreen(),
+        binding: AppPagesBinding()),
+    GetPage(
+        name: packagesRoutes,
+        page: () => const PackagesScreen(),
+        binding: PackagesBinding()),
+    GetPage(
+        name: addPackagesRoutes,
+        page: () => const AddPackagesScreen(),
+        binding: AddPackagesBinding()),
+    GetPage(
+        name: packagesCategoriesRoutes,
+        page: () => const PackagesCategoriesScreen(),
+        binding: PackagesCategoriesBinding()),
+    GetPage(
+        name: productsRoutes,
+        page: () => const ProductsScreen(),
+        binding: ProductsBinding()),
+    GetPage(
+        name: createProductsRoutes,
+        page: () => const CreateProductsScreen(),
+        binding: CretaeProductsBinding()),
+    GetPage(
+        name: shopCategoriesRoutes,
+        page: () => const ShopCategoriesScreen(),
+        binding: ShopCategoriesBinding()),
+    GetPage(
+        name: shopSubCategoriesRoutes,
+        page: () => const ShopSubCategoriesScreen(),
+        binding: ShopSubCategoriesBinding()),
+    GetPage(
+        name: salonCategoriesRoutes,
+        page: () => const SalonCategoriesScreen(),
+        binding: SalonCategoriesBinding()),
+    GetPage(
+        name: citiesCategoriesRoutes,
+        page: () => const CitiesCategoriesScreen(),
+        binding: CitiesCategoriesBinding()),
+    GetPage(
+        name: slotRoutes,
+        page: () => const SlotScreen(),
+        binding: SlotBinding()),
+    GetPage(
+        name: addSlotRoutes,
+        page: () => const AddSlotScreen(),
+        binding: AddSlotBinding()),
+    GetPage(
+        name: addServicesRoutes,
+        page: () => const AddServicesScreen(),
+        binding: AddServicesBinding()),
+    GetPage(
+        name: servicesRoutes,
+        page: () => const ServicesScreen(),
+        binding: ServicesBinding()),
+    GetPage(
+        name: servicesCategoriesRoutes,
+        page: () => const ServiceCategoriesScreen(),
+        binding: ServicesCategoriesBinding()),
+    GetPage(
+        name: packagesSpecialistRoutes,
+        page: () => const PackagesSpecialistScreen(),
+        binding: PackagesSpecialistBinding()),
+    GetPage(
+        name: individualProfileRoutes,
+        page: () => const IndividualProfileScreen(),
+        binding: IndividualProfileBinding()),
+    GetPage(
+        name: individualProfileCategoriesRoutes,
+        page: () => const IndividualCategoriesScreen(),
+        binding: IndividualProfileCategoriesBinding()),
+    GetPage(
+        name: individualCitiesRoutes,
+        page: () => const IndividualCitiesScreen(),
+        binding: IndividualCitiesBinding()),
     GetPage(name: errorRoutes, page: () => const ErrorScreen()),
-    GetPage(name: splash, page: () => const SplashScreen(), binding: SplashBinding()),
-    GetPage(name: analyticsRoutes, page: () => const AnalyticScreen(), binding: AnalyticsBinding()),
-    GetPage(name: firebaseRoutes, page: () => const FirebaseVerificationScreen(), binding: FirebaseBinding(), fullscreenDialog: true),
-    GetPage(name: productOrderDetailsRoutes, page: () => const ProductOrderDetailScreen(), binding: ProductOrderDetailsBinding()),
-    GetPage(name: registerCategoriesRoutes, page: () => const RegisterCategoryScreen(), binding: RegisterCategoriesBinding(), fullscreenDialog: true),
-    GetPage(name: policyRoutes, page: () => const PolicyScreen(), binding: PolicyBinding()),
-    GetPage(name: treatmentCategoriesRoutes, page: () => const TreatmentCategoriesScreen(), binding: TreatmentCategoriesBinding()),
-    GetPage(name: displayRoutes, page: () => const DisplayImage(), binding: DisplayBinding()),
-
+    GetPage(
+        name: splash,
+        page: () => const SplashScreen(),
+        binding: SplashBinding()),
+    GetPage(
+        name: analyticsRoutes,
+        page: () => const AnalyticScreen(),
+        binding: AnalyticsBinding()),
+    GetPage(
+        name: firebaseRoutes,
+        page: () => const FirebaseVerificationScreen(),
+        binding: FirebaseBinding(),
+        fullscreenDialog: true),
+    GetPage(
+        name: productOrderDetailsRoutes,
+        page: () => const ProductOrderDetailScreen(),
+        binding: ProductOrderDetailsBinding()),
+    GetPage(
+        name: registerCategoriesRoutes,
+        page: () => const RegisterCategoryScreen(),
+        binding: RegisterCategoriesBinding(),
+        fullscreenDialog: true),
+    GetPage(
+        name: policyRoutes,
+        page: () => const PolicyScreen(),
+        binding: PolicyBinding()),
+    GetPage(
+        name: treatmentCategoriesRoutes,
+        page: () => const TreatmentCategoriesScreen(),
+        binding: TreatmentCategoriesBinding()),
+    GetPage(
+        name: displayRoutes,
+        page: () => const DisplayImage(),
+        binding: DisplayBinding()),
   ];
 }

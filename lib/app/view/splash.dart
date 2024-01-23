@@ -69,8 +69,9 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.offNamed(AppRouter.getTabRoute());
         } else {
           // Get.offNamed(AppRouter.getTabRoute());
-          // Uncomment the line 77 after changing the splash
-          Get.offNamed(AppRouter.getInitialRoute());
+          Get.offNamed(AppRouter.getIntroSliderPage());
+          // uncomment
+          // Get.offNamed(AppRouter.getInitialRoute());
         }
         // if (Get.find<SplashController>().parser.isNewUser() == false) {
         //   Get.find<SplashController>().parser.saveWelcome(true);
@@ -123,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             Positioned(
-              top: 15,
+              top: 0,
               left: Get.width - 190,
               child: const Image(
                 image: AssetImage('assets/images/language_icon_curve.png'),
@@ -131,7 +132,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ), //CircularAvatar
             ),
             Positioned(
-              top: 50,
+              top: 35,
               left: Get.width - 100,
               child: const Image(
                 image: AssetImage('assets/images/select_language.png'),
