@@ -34,19 +34,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: 50,
-            title: Text(
-              'Partner Registration'.tr,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.start,
-              style: ThemeProvider.titleStyle,
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   centerTitle: true,
+          //   elevation: 0,
+          //   toolbarHeight: 50,
+          //   title: Text(
+          //     'Partner Registration'.tr,
+          //     overflow: TextOverflow.ellipsis,
+          //     textAlign: TextAlign.start,
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          // ),
           bottomNavigationBar: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: value.currentView == 1
@@ -71,64 +71,65 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   )
                 : value.currentView == 2
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                              child: SizedBox(
-                            width: double.infinity,
-                            height: 40,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  value.onBack();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    foregroundColor: ThemeProvider.whiteColor,
-                                    backgroundColor: ThemeProvider.greyColor,
-                                    shadowColor: ThemeProvider.blackColor,
-                                    elevation: 3,
-                                    shape: (RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50),
-                                    )),
-                                    padding: const EdgeInsets.all(0)),
-                                child: Text(
-                                  'Previews'.tr,
-                                  style: const TextStyle(
-                                      letterSpacing: 1,
-                                      fontSize: 16,
-                                      color: ThemeProvider.whiteColor,
-                                      fontFamily: 'bold'),
-                                )),
-                          )),
-                          const SizedBox(width: 10),
-                          Expanded(
-                              child: SizedBox(
-                            width: double.infinity,
-                            height: 40,
-                            child: ElevatedButton(
-                                onPressed: () {
-                                  value.onRegister();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    foregroundColor: ThemeProvider.whiteColor,
-                                    backgroundColor: ThemeProvider.appColor,
-                                    shadowColor: ThemeProvider.blackColor,
-                                    elevation: 3,
-                                    shape: (RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50),
-                                    )),
-                                    padding: const EdgeInsets.all(0)),
-                                child: Text(
-                                  'Submit'.tr,
-                                  style: const TextStyle(
-                                      letterSpacing: 1,
-                                      fontSize: 16,
-                                      color: ThemeProvider.whiteColor,
-                                      fontFamily: 'bold'),
-                                )),
-                          )),
-                        ],
-                      )
+                    ? SizedBox()
+                    // Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Expanded(
+                    //           child: SizedBox(
+                    //         width: double.infinity,
+                    //         height: 40,
+                    //         child: ElevatedButton(
+                    //             onPressed: () {
+                    //               value.onBack();
+                    //             },
+                    //             style: ElevatedButton.styleFrom(
+                    //                 foregroundColor: ThemeProvider.whiteColor,
+                    //                 backgroundColor: ThemeProvider.greyColor,
+                    //                 shadowColor: ThemeProvider.blackColor,
+                    //                 elevation: 3,
+                    //                 shape: (RoundedRectangleBorder(
+                    //                   borderRadius: BorderRadius.circular(50),
+                    //                 )),
+                    //                 padding: const EdgeInsets.all(0)),
+                    //             child: Text(
+                    //               'Previews'.tr,
+                    //               style: const TextStyle(
+                    //                   letterSpacing: 1,
+                    //                   fontSize: 16,
+                    //                   color: ThemeProvider.whiteColor,
+                    //                   fontFamily: 'bold'),
+                    //             )),
+                    //       )),
+                    //       const SizedBox(width: 10),
+                    //       Expanded(
+                    //           child: SizedBox(
+                    //         width: double.infinity,
+                    //         height: 40,
+                    //         child: ElevatedButton(
+                    //             onPressed: () {
+                    //               value.onRegister();
+                    //             },
+                    //             style: ElevatedButton.styleFrom(
+                    //                 foregroundColor: ThemeProvider.whiteColor,
+                    //                 backgroundColor: ThemeProvider.appColor,
+                    //                 shadowColor: ThemeProvider.blackColor,
+                    //                 elevation: 3,
+                    //                 shape: (RoundedRectangleBorder(
+                    //                   borderRadius: BorderRadius.circular(50),
+                    //                 )),
+                    //                 padding: const EdgeInsets.all(0)),
+                    //             child: Text(
+                    //               'Submit'.tr,
+                    //               style: const TextStyle(
+                    //                   letterSpacing: 1,
+                    //                   fontSize: 16,
+                    //                   color: ThemeProvider.whiteColor,
+                    //                   fontFamily: 'bold'),
+                    //             )),
+                    //       )),
+                    //     ],
+                    //   )
                     : const SizedBox(),
           ),
           body: SingleChildScrollView(
@@ -275,7 +276,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -287,7 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -335,7 +336,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -347,7 +348,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -395,7 +396,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -407,7 +408,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -455,7 +456,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                             child: Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 16),
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               child: Container(
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
@@ -467,7 +468,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: const EdgeInsets.all(10),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -514,49 +515,109 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     )
                   : Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
+                          horizontal: 0, vertical: 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Stack(
+                            children: [
+                              Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(top: 25),
+                                    height: 150.0,
+                                    decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            ThemeProvider.whiteColor,
+                                            Colors.deepPurple.shade50
+                                          ],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                        ),
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(30),
+                                            bottomRight: Radius.circular(30))),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            'Partner Registration'.tr,
+                                            style: const TextStyle(
+                                                color: ThemeProvider.blackColor,
+                                                fontSize: 25,
+                                                fontFamily: 'bold'),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  )
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 120,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            color: Colors.white),
+                                        padding: EdgeInsets.all(8.0),
+                                        child: ClipOval(
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              chooseFile(
+                                                  context, value, "profile");
+                                            },
+                                            child: Image.network(
+                                              "${Environments.apiBaseURL}storage/images/${value.cover}",
+                                              height: 100,
+                                              width: 100,
+                                              fit: BoxFit.fitWidth,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                    'assets/images/placeholder.jpeg',
+                                                    fit: BoxFit.cover,
+                                                    height: 100,
+                                                    width: 100);
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           Column(
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: myBoxDecoration(),
+                                padding: const EdgeInsets.all(8),
                                 child: Column(
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 30),
+                                          vertical: 8),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Column(
-                                            children: [
-                                              SizedBox(
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    chooseFile(context, value,
-                                                        "profile");
-                                                  },
-                                                  child: Image.network(
-                                                    "${Environments.apiBaseURL}storage/images/${value.cover}",
-                                                    height: 100,
-                                                    width: 100,
-                                                    fit: BoxFit.fitWidth,
-                                                    errorBuilder: (context,
-                                                        error, stackTrace) {
-                                                      return Image.asset(
-                                                          'assets/images/placeholder.jpeg',
-                                                          fit: BoxFit.cover,
-                                                          height: 100,
-                                                          width: 100);
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                            children: [],
                                           ),
                                         ],
                                       ),
@@ -575,30 +636,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           onChanged: (String txt) {},
                                           cursorColor: ThemeProvider.appColor,
                                           decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            border: InputBorder.none,
-                                            labelText: "Email".tr,
-                                            // suffix: GestureDetector(
-                                            //     onTap: () {
-                                            //       value.verifyEmail();
-                                            //     },
-                                            //     child: Text(
-                                            //       value.emailVerified == false
-                                            //           ? 'Verify'.tr
-                                            //           : 'Verified'.tr,
-                                            //       style: TextStyle(
-                                            //           color:
-                                            //               value.emailVerified ==
-                                            //                       true
-                                            //                   ? ThemeProvider
-                                            //                       .appColor
-                                            //                   : ThemeProvider
-                                            //                       .redColor,
-                                            //           fontSize: 12),
-                                            //     )),
-                                          ),
+                                              labelStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color:
+                                                      ThemeProvider.greyColor),
+                                              border: InputBorder.none,
+                                              labelText: "Enter your email".tr,
+                                              // suffix: GestureDetector(
+                                              //     onTap: () {
+                                              //       value.verifyEmail();
+                                              //     },
+                                              //     child: Text(
+                                              //       value.emailVerified == false
+                                              //           ? 'Verify'.tr
+                                              //           : 'Verified'.tr,
+                                              //       style: TextStyle(
+                                              //           color:
+                                              //               value.emailVerified ==
+                                              //                       true
+                                              //                   ? ThemeProvider
+                                              //                       .appColor
+                                              //                   : ThemeProvider
+                                              //                       .redColor,
+                                              //           fontSize: 12),
+                                              //     )),
+                                              suffixIcon: Icon(
+                                                CupertinoIcons.mail,
+                                                color: ThemeProvider.appColor,
+                                              )),
                                         ),
                                       ),
                                     ),
@@ -677,7 +742,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                       horizontal: 16),
                                               decoration: textFieldDecoration(),
                                               child: TextFormField(
-                                                keyboardType: TextInputType.number,
+                                                keyboardType:
+                                                    TextInputType.number,
                                                 controller:
                                                     value.mobileTextEditor,
                                                 onChanged: (String txt) {},
@@ -685,64 +751,128 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 cursorColor:
                                                     ThemeProvider.appColor,
                                                 decoration: InputDecoration(
-                                                  labelStyle: const TextStyle(
-                                                      fontSize: 14,
+                                                    labelStyle: const TextStyle(
+                                                        fontSize: 14,
+                                                        color: ThemeProvider
+                                                            .greyColor),
+                                                    border: InputBorder.none,
+                                                    labelText:
+                                                        "Enter your phone".tr,
+                                                    // suffix: GestureDetector(
+                                                    //     onTap: () {
+                                                    //       value.verifyPhone();
+                                                    //     },
+                                                    //     child: Text(
+                                                    //       value.phoneVerified ==
+                                                    //               false
+                                                    //           ? 'Verify'.tr
+                                                    //           : 'Verified'.tr,
+                                                    //       style: TextStyle(
+                                                    //           color: value.phoneVerified ==
+                                                    //                   true
+                                                    //               ? ThemeProvider
+                                                    //                   .appColor
+                                                    //               : ThemeProvider
+                                                    //                   .redColor,
+                                                    //           fontSize: 12),
+                                                    //     )),
+                                                    suffixIcon: Icon(
+                                                      CupertinoIcons.phone,
                                                       color: ThemeProvider
-                                                          .greyColor),
-                                                  border: InputBorder.none,
-                                                  labelText: "Mobile Number".tr,
-                                                  // suffix: GestureDetector(
-                                                  //     onTap: () {
-                                                  //       value.verifyPhone();
-                                                  //     },
-                                                  //     child: Text(
-                                                  //       value.phoneVerified ==
-                                                  //               false
-                                                  //           ? 'Verify'.tr
-                                                  //           : 'Verified'.tr,
-                                                  //       style: TextStyle(
-                                                  //           color: value.phoneVerified ==
-                                                  //                   true
-                                                  //               ? ThemeProvider
-                                                  //                   .appColor
-                                                  //               : ThemeProvider
-                                                  //                   .redColor,
-                                                  //           fontSize: 12),
-                                                  //     )),
-                                                ),
+                                                          .appColor,
+                                                    )),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    value.type != 0
-                                        ? Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8),
-                                            child: Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 16),
-                                              decoration: textFieldDecoration(),
-                                              child: TextFormField(
-                                                textInputAction: TextInputAction.done,
-                                                controller: value.name,
-                                                onChanged: (String txt) {},
-                                                cursorColor:
-                                                    ThemeProvider.appColor,
-                                                decoration: InputDecoration(
-                                                  labelStyle: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .greyColor),
-                                                  border: InputBorder.none,
-                                                  labelText: "Business Name".tr,
-                                                ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        decoration: textFieldDecoration(),
+                                        child: TextFormField(
+                                          controller: value.passwordTextEditor,
+                                          onChanged: (String txt) {},
+                                          cursorColor: ThemeProvider.appColor,
+                                          obscureText: value.passwordVisible,
+                                          decoration: InputDecoration(
+                                            labelStyle: const TextStyle(
+                                                fontSize: 14,
+                                                color: ThemeProvider.greyColor),
+                                            suffixIcon: IconButton(
+                                              onPressed: () {
+                                                value.togglePasswordBtn();
+                                              },
+                                              icon: Icon(
+                                                value.passwordVisible
+                                                    ? CupertinoIcons.eye
+                                                    : CupertinoIcons.eye_slash,
+                                                color: ThemeProvider.appColor,
                                               ),
                                             ),
-                                          )
-                                        : const SizedBox(),
+                                            border: InputBorder.none,
+                                            labelText: "Password".tr,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        decoration: textFieldDecoration(),
+                                        child: TextFormField(
+                                          controller:
+                                              value.confirmPasswordTextEditor,
+                                          onChanged: (String txt) {},
+                                          cursorColor: ThemeProvider.appColor,
+                                          obscureText:
+                                              value.confirmPasswordVisible,
+                                          decoration: InputDecoration(
+                                            labelStyle: const TextStyle(
+                                                fontSize: 14,
+                                                color: ThemeProvider.greyColor),
+                                            suffixIcon: IconButton(
+                                              onPressed: () {
+                                                value
+                                                    .toggleConfirmPasswordBtn();
+                                              },
+                                              icon: Icon(
+                                                value.passwordVisible
+                                                    ? CupertinoIcons.eye
+                                                    : CupertinoIcons.eye_slash,
+                                                color: ThemeProvider.appColor,
+                                              ),
+                                            ),
+                                            border: InputBorder.none,
+                                            labelText: "Confirm Password".tr,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "PERSONAL DETAILS",
+                                          style: TextStyle(
+                                              fontSize: 20, fontFamily: 'bold'),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
                                     Row(
                                       children: [
                                         Expanded(
@@ -800,73 +930,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        decoration: textFieldDecoration(),
-                                        child: TextFormField(
-                                          controller: value.passwordTextEditor,
-                                          onChanged: (String txt) {},
-                                          cursorColor: ThemeProvider.appColor,
-                                          obscureText: value.passwordVisible,
-                                          decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            suffixIcon: IconButton(
-                                              onPressed: () {
-                                                value.togglePasswordBtn();
-                                              },
-                                              icon: Icon(
-                                                value.passwordVisible
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-                                                color: ThemeProvider.appColor,
-                                              ),
-                                            ),
-                                            border: InputBorder.none,
-                                            labelText: "Password".tr,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        decoration: textFieldDecoration(),
-                                        child: TextFormField(
-                                          controller:
-                                              value.confirmPasswordTextEditor,
-                                          onChanged: (String txt) {},
-                                          cursorColor: ThemeProvider.appColor,
-                                          obscureText: value.confirmPasswordVisible,
-                                          decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            suffixIcon: IconButton(
-                                              onPressed: () {
-                                                value.toggleConfirmPasswordBtn();
-                                              },
-                                              icon: Icon(
-                                                value.passwordVisible
-                                                    ? Icons.visibility
-                                                    : Icons.visibility_off,
-                                                color: ThemeProvider.appColor,
-                                              ),
-                                            ),
-                                            border: InputBorder.none,
-                                            labelText: "Confirm Password".tr,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+
                                     Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8),
@@ -877,6 +941,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: SizedBox(
                                           width: double.infinity,
                                           child: DropdownButton<String>(
+                                            iconDisabledColor:
+                                                ThemeProvider.appColor,
+                                            iconEnabledColor:
+                                                ThemeProvider.appColor,
                                             value: value.selectedGender,
                                             isExpanded: true,
                                             underline: const SizedBox(),
@@ -889,7 +957,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                     (String value) {
                                               return DropdownMenuItem<String>(
                                                 value: value,
-                                                child: Text(value),
+                                                child: Text(
+                                                  value,
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.grey.shade600),
+                                                ),
                                               );
                                             }).toList(),
                                           ),
@@ -908,19 +981,68 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           controller: value.dateInput,
                                           cursorColor: ThemeProvider.appColor,
                                           decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            border: InputBorder.none,
-                                            labelText: "dd/mm/yyyy",
-                                          ),
+                                              labelStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color:
+                                                      ThemeProvider.greyColor),
+                                              border: InputBorder.none,
+                                              labelText:
+                                                  "Select your date of birth",
+                                              suffixIcon: Icon(
+                                                Icons.cake,
+                                                color: ThemeProvider.appColor,
+                                              )),
                                           onTap: () async {
                                             value.selectDate(context);
                                           },
                                         ),
                                       ),
                                     ),
-
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "BUSINESS DETAILS",
+                                          style: TextStyle(
+                                              fontSize: 20, fontFamily: 'bold'),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    value.type != 0
+                                        ? Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8),
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              decoration: textFieldDecoration(),
+                                              child: TextFormField(
+                                                textInputAction:
+                                                    TextInputAction.done,
+                                                controller: value.name,
+                                                onChanged: (String txt) {},
+                                                cursorColor:
+                                                    ThemeProvider.appColor,
+                                                decoration: InputDecoration(
+                                                  labelStyle: const TextStyle(
+                                                      fontSize: 14,
+                                                      color: ThemeProvider
+                                                          .greyColor),
+                                                  border: InputBorder.none,
+                                                  labelText: "Business Name".tr,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        : const SizedBox(),
                                     // Container(
                                     //   padding: const EdgeInsets.symmetric(
                                     //       vertical: 8),
@@ -951,19 +1073,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         decoration: textFieldDecoration(),
                                         child: TextFormField(
                                           textInputAction: TextInputAction.done,
-                                          controller: value.descriptionsTextEditor,
+                                          controller:
+                                              value.descriptionsTextEditor,
                                           onChanged: (String txt) {},
                                           cursorColor: ThemeProvider.appColor,
                                           keyboardType: TextInputType.multiline,
                                           maxLines: 4,
                                           decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                      ThemeProvider.greyColor),
-                                              border: InputBorder.none,
-                                              labelText:
-                                                  "Descriptions".tr),
+                                            labelStyle: const TextStyle(
+                                                fontSize: 14,
+                                                color: ThemeProvider.greyColor),
+                                            border: InputBorder.none,
+                                            hintText: "About Your Business".tr,
+                                            hintStyle: const TextStyle(
+                                                fontSize: 14,
+                                                color: ThemeProvider.greyColor),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -1010,6 +1135,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         child: SizedBox(
                                           width: double.infinity,
                                           child: DropdownButton<CityModal>(
+                                            iconDisabledColor:
+                                                ThemeProvider.appColor,
+                                            iconEnabledColor:
+                                                ThemeProvider.appColor,
                                             underline: const SizedBox(),
                                             isExpanded: true,
                                             value: value.selectedCity,
@@ -1062,18 +1191,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             horizontal: 16),
                                         decoration: textFieldDecoration(),
                                         child: TextFormField(
-                                            controller: value.zipcode,
-                                            cursorColor: ThemeProvider.appColor,
-                                            keyboardType: TextInputType.text,
-                                            decoration: InputDecoration(
-                                              labelStyle: const TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                      ThemeProvider.greyColor),
-                                              border: InputBorder.none,
-                                              labelText: "Postcode".tr,
-                                            ),
-                                           ),
+                                          controller: value.zipcode,
+                                          cursorColor: ThemeProvider.appColor,
+                                          keyboardType: TextInputType.text,
+                                          decoration: InputDecoration(
+                                            labelStyle: const TextStyle(
+                                                fontSize: 14,
+                                                color: ThemeProvider.greyColor),
+                                            border: InputBorder.none,
+                                            labelText: "Postcode".tr,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     // Column(
@@ -1167,13 +1295,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           cursorColor: ThemeProvider.appColor,
                                           keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            border: InputBorder.none,
-                                            labelText: "ID Card".tr,
-                                          ),
-                                          onTap: (){
+                                              labelStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color:
+                                                      ThemeProvider.greyColor),
+                                              border: InputBorder.none,
+                                              labelText: "ID Card".tr,
+                                              suffixIcon: Icon(
+                                                CupertinoIcons
+                                                    .arrow_down_to_line_alt,
+                                                color: ThemeProvider.appColor,
+                                              )),
+                                          onTap: () {
                                             chooseFile(context, value, "card");
                                           },
                                         ),
@@ -1192,129 +1325,162 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           cursorColor: ThemeProvider.appColor,
                                           keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
-                                            labelStyle: const TextStyle(
-                                                fontSize: 14,
-                                                color: ThemeProvider.greyColor),
-                                            border: InputBorder.none,
-                                            labelText:  "Upload Beauty Certificate".tr,
-                                          ),
-                                          onTap: (){
-                                            chooseFile(context, value, "beautyCertificate");
+                                              labelStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  color:
+                                                      ThemeProvider.greyColor),
+                                              border: InputBorder.none,
+                                              labelText:
+                                                  "Upload Beauty Certificate"
+                                                      .tr,
+                                              suffixIcon: Icon(
+                                                CupertinoIcons
+                                                    .arrow_down_to_line_alt,
+                                                color: ThemeProvider.appColor,
+                                              )),
+                                          onTap: () {
+                                            chooseFile(context, value,
+                                                "beautyCertificate");
                                           },
                                         ),
                                       ),
                                     ),
 
-
-                                    Row(
-                                        children: [
-                                          Checkbox(
-                                            activeColor: ThemeProvider.appColor,
-                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                            visualDensity: VisualDensity.compact,
-                                            value: value.termCondition,
-                                            onChanged: (newValue){
-                                              //Do Something When Value Changes to True Or False
-                                              value.termCondition = newValue!;
-                                              value.update();
-                                            },
-                                          ),
-
-                                          Expanded(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Text.rich(
+                                    Row(children: [
+                                      Checkbox(
+                                        activeColor: ThemeProvider.appColor,
+                                        materialTapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                        visualDensity: VisualDensity.compact,
+                                        value: value.termCondition,
+                                        onChanged: (newValue) {
+                                          //Do Something When Value Changes to True Or False
+                                          value.termCondition = newValue!;
+                                          value.update();
+                                        },
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text.rich(
+                                            TextSpan(
+                                              text:
+                                                  'I’ve read and accepted the '
+                                                      .tr,
+                                              style: TextStyle(fontSize: 14),
+                                              children: <TextSpan>[
                                                 TextSpan(
-                                                  text: 'I’ve read and accepted the '.tr,
-                                                  style: TextStyle(fontSize: 14),
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                        text: 'Terms & conditions'.tr,
-                                                        style: TextStyle(
-                                                          decoration: TextDecoration.underline,
-                                                          decorationColor: ThemeProvider.blackColor,
-                                                        )),
-                                                    TextSpan(
-                                                        text: ' *',
-                                                        style: TextStyle(color: ThemeProvider.redColor)
-                                                    )
-                                                    // can add more TextSpans here...
-                                                  ],
-                                                ),
-                                              ),
+                                                    text:
+                                                        'Terms & conditions'.tr,
+                                                    style: TextStyle(
+                                                      decoration: TextDecoration
+                                                          .underline,
+                                                      decorationColor:
+                                                          ThemeProvider
+                                                              .blackColor,
+                                                    )),
+                                                TextSpan(
+                                                    text: ' *',
+                                                    style: TextStyle(
+                                                        color: ThemeProvider
+                                                            .redColor))
+                                                // can add more TextSpans here...
+                                              ],
                                             ),
                                           ),
-
-                                        ]
-                                    ),
-                                    Row(
-                                        children: [
-                                          Checkbox(
-
-                                            activeColor: ThemeProvider.appColor,
-                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                            visualDensity: VisualDensity.compact,
-                                            value: value.ageCondition,
-                                            onChanged: (newValue){
-                                              value.ageCondition = newValue!;
-                                              value.update();
-                                            },
-                                          ),
-
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text.rich(
+                                        ),
+                                      ),
+                                    ]),
+                                    Row(children: [
+                                      Checkbox(
+                                        activeColor: ThemeProvider.appColor,
+                                        materialTapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                        visualDensity: VisualDensity.compact,
+                                        value: value.ageCondition,
+                                        onChanged: (newValue) {
+                                          value.ageCondition = newValue!;
+                                          value.update();
+                                        },
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text.rich(
+                                          TextSpan(
+                                            text: 'I am over 18 years old'.tr,
+                                            style: TextStyle(fontSize: 14),
+                                            children: <TextSpan>[
                                               TextSpan(
-                                                text: 'I am over 18 years old'.tr,
-                                                style: TextStyle(fontSize: 14),
-                                                children: <TextSpan>[
-                                                  TextSpan(
-                                                      text: ' *',
-                                                      style: TextStyle(color: ThemeProvider.redColor)
-                                                  )
-                                                  // can add more TextSpans here...
-                                                ],
-                                              ),
-                                            ),
+                                                  text: ' *',
+                                                  style: TextStyle(
+                                                      color: ThemeProvider
+                                                          .redColor))
+                                              // can add more TextSpans here...
+                                            ],
                                           ),
-
-                                        ]
-                                    ),
-                                    Row(
-                                        children: [
-                                          Checkbox(
-                                            activeColor: ThemeProvider.appColor,
-                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                            visualDensity: VisualDensity.compact,
-                                            value: value.personalInformation,
-                                            onChanged: (newValue){
-                                              value.personalInformation = newValue!;
-                                              value.update();
-                                            },
+                                        ),
+                                      ),
+                                    ]),
+                                    Row(children: [
+                                      Checkbox(
+                                        activeColor: ThemeProvider.appColor,
+                                        materialTapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                        visualDensity: VisualDensity.compact,
+                                        value: value.personalInformation,
+                                        onChanged: (newValue) {
+                                          value.personalInformation = newValue!;
+                                          value.update();
+                                        },
+                                      ),
+                                      Expanded(
+                                          child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Text.rich(
+                                          TextSpan(
+                                            text:
+                                                'I would like to receive the latest news, promos, and updates from Bunitas. Bunitas does not share or sell your personal information'
+                                                    .tr,
+                                            style: TextStyle(fontSize: 14),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                  text: ' *',
+                                                  style: TextStyle(
+                                                      color: ThemeProvider
+                                                          .redColor))
+                                              // can add more TextSpans here...
+                                            ],
                                           ),
-
-                                          Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Text.rich(
-                                                  TextSpan(
-                                                    text: 'I would like to receive the latest news, promos, and updates from Bunitas. Bunitas does not share or sell your personal information'.tr,
-                                                    style: TextStyle(fontSize: 14),
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                          text: ' *',
-                                                          style: TextStyle(color: ThemeProvider.redColor)
-                                                      )
-                                                      // can add more TextSpans here...
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                          ),
-
-                                        ]
-                                    ),
+                                        ),
+                                      )),
+                                    ]),
                                     const SizedBox(height: 16),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          value.onRegister();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            fixedSize: Size(200, 50),
+                                            foregroundColor:
+                                                ThemeProvider.whiteColor,
+                                            backgroundColor:
+                                                ThemeProvider.appColor,
+                                            shadowColor:
+                                                ThemeProvider.blackColor,
+                                            elevation: 3,
+                                            shape: (RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            )),
+                                            padding: const EdgeInsets.all(0)),
+                                        child: Text(
+                                          'Submit'.tr,
+                                          style: const TextStyle(
+                                              letterSpacing: 1,
+                                              fontSize: 16,
+                                              color: ThemeProvider.whiteColor,
+                                              fontFamily: 'bold'),
+                                        )),
                                   ],
                                 ),
                               ),
@@ -1347,15 +1513,15 @@ contentButtonStyle() {
 
 textFieldDecoration() {
   return BoxDecoration(
-    color: ThemeProvider.backgroundColor,
+    color: ThemeProvider.whiteColor,
     borderRadius: const BorderRadius.all(
-      Radius.circular(8.0),
+      Radius.circular(15.0),
     ),
     boxShadow: [
       BoxShadow(
-          color: ThemeProvider.blackColor.withOpacity(0.2),
-          offset: const Offset(0, 1),
-          blurRadius: 3),
+          color: Colors.deepPurple.withOpacity(0.1),
+          offset: const Offset(0, 5),
+          blurRadius: 20),
     ],
   );
 }
@@ -1364,11 +1530,11 @@ myBoxDecoration() {
   return BoxDecoration(
     color: ThemeProvider.whiteColor,
     borderRadius: const BorderRadius.all(
-      Radius.circular(8),
+      Radius.circular(15),
     ),
     boxShadow: [
       BoxShadow(
-          color: ThemeProvider.blackColor.withOpacity(0.2),
+          color: Colors.deepPurple.withOpacity(0.2),
           offset: const Offset(0, 1),
           blurRadius: 3),
     ],

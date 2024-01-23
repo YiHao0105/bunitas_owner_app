@@ -79,8 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: const BoxDecoration(
                   color: ThemeProvider.whiteColor,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(50),
+                    topRight: Radius.circular(50),
                   ),
                 ),
                 child: value.loginVersion == 0
@@ -214,7 +214,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: double.infinity,
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 13.0),
-                                decoration: contentButtonStyle(),
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(15.0),
+                                    ),
+                                    color: ThemeProvider.appColor),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -222,7 +226,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       'LOG IN'.tr,
                                       style: const TextStyle(
                                           color: ThemeProvider.whiteColor,
-                                          fontSize: 17),
+                                          fontSize: 17,
+                                          fontFamily: 'bold'),
                                     ),
                                   ],
                                 ),
@@ -253,36 +258,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     : value.loginVersion == 1
                         ? Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 30),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Welcome'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.blackColor,
-                                          fontSize: 17),
-                                    ),
-                                  ],
-                                ),
+                              SizedBox(
+                                height: 40,
                               ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(top: 30),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         'Welcome'.tr,
+                              //         style: const TextStyle(
+                              //             color: ThemeProvider.blackColor,
+                              //             fontSize: 17),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Padding(
+                              //   padding:
+                              //       const EdgeInsets.symmetric(vertical: 10),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         'Login With Your Account'.tr,
+                              //         style: const TextStyle(
+                              //             color: ThemeProvider.greyColor,
+                              //             fontSize: 13),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Login With Your Account'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.greyColor,
-                                          fontSize: 13),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
                                 child: Row(
                                   children: <Widget>[
                                     Expanded(
@@ -307,30 +315,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                           textInputAction: TextInputAction.next,
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
+                                            labelText: 'Mobile Number'.tr,
                                             filled: true,
                                             fillColor: ThemeProvider.whiteColor,
-                                            labelText: 'Mobile Number'.tr,
-                                            hintStyle: const TextStyle(
-                                                color: ThemeProvider.greyColor,
-                                                fontSize: 12),
                                             contentPadding:
                                                 const EdgeInsets.only(
-                                                    bottom: 8.0,
-                                                    top: 14.0,
-                                                    left: 20),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              borderSide: const BorderSide(
+                                                    bottom: 8.0, top: 14.0),
+                                            focusedBorder:
+                                                const UnderlineInputBorder(
+                                              borderSide: BorderSide(
                                                   color:
                                                       ThemeProvider.appColor),
                                             ),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                borderSide: const BorderSide(
-                                                    color: ThemeProvider
-                                                        .appColor)),
+                                            enabledBorder:
+                                                const UnderlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                        color: Colors.grey)),
                                           ),
                                         ),
                                       ),
@@ -340,7 +340,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
+                                    const EdgeInsets.symmetric(vertical: 10),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: TextField(
@@ -364,26 +364,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: ThemeProvider.appColor,
                                         ),
                                       ),
-                                      hintText: 'Password'.tr,
-                                      hintStyle: const TextStyle(
-                                          color: ThemeProvider.greyColor,
-                                          fontSize: 12),
+                                      labelText: 'Password'.tr,
                                       contentPadding: const EdgeInsets.only(
-                                          bottom: 8.0,
-                                          top: 14.0,
-                                          left: 20,
-                                          right: 20),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        borderSide: const BorderSide(
+                                          bottom: 8.0, top: 14.0),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
                                             color: ThemeProvider.appColor),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          borderSide: const BorderSide(
-                                              color: ThemeProvider.appColor)),
+                                      enabledBorder: const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey)),
                                     ),
                                   ),
                                 ),
@@ -392,7 +382,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     InkWell(
                                       onTap: () {
@@ -401,7 +391,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(
                                         'Forgot Password?'.tr,
                                         style: const TextStyle(
-                                            color: ThemeProvider.blackColor,
+                                            color: ThemeProvider.appColor,
                                             fontSize: 13),
                                       ),
                                     ),
@@ -419,7 +409,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                     width: double.infinity,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 13.0),
-                                    decoration: contentButtonStyle(),
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0),
+                                        ),
+                                        color: ThemeProvider.appColor),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -428,7 +422,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           'LOG IN'.tr,
                                           style: const TextStyle(
                                               color: ThemeProvider.whiteColor,
-                                              fontSize: 17),
+                                              fontSize: 17,
+                                              fontFamily: 'bold'),
                                         ),
                                       ],
                                     ),
@@ -440,15 +435,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    Text(
+                                      "Don't have account ?".tr,
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     InkWell(
                                       onTap: () {
                                         value.onSignUp();
                                       },
                                       child: Text(
-                                        "Don't have an Account? Sign Up".tr,
+                                        "Sign Up".tr,
                                         style: const TextStyle(
-                                            color: ThemeProvider.greyColor,
-                                            fontSize: 13),
+                                            color: ThemeProvider.appColor,
+                                            fontFamily: 'bold',
+                                            fontSize: 14),
                                       ),
                                     ),
                                   ],

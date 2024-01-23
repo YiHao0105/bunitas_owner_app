@@ -58,7 +58,7 @@ class _IntroSliderState extends State<IntroSlider> {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: ThemeProvider.purpleColor)),
+                          color: ThemeProvider.appColor)),
                 ),
                 home: null),
             next: Next(
@@ -67,7 +67,7 @@ class _IntroSliderState extends State<IntroSlider> {
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: ThemeProvider.purpleColor),
+                  color: ThemeProvider.appColor),
             )),
             back: Back(
                 child: Text("Previous",
@@ -76,7 +76,7 @@ class _IntroSliderState extends State<IntroSlider> {
                         fontWeight: FontWeight.bold,
                         color: ThemeProvider.greyColor))),
             dotIndicator: DotIndicator(
-                selectedColor: ThemeProvider.purpleColor,
+                selectedColor: ThemeProvider.appColor,
                 unselectedColor: ThemeProvider.greyColor),
           ),
           Positioned(
