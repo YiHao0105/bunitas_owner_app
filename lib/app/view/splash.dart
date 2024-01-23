@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
         } else {
           // Get.offNamed(AppRouter.getTabRoute());
           // Uncomment the line 77 after changing the splash
-          // Get.offNamed(AppRouter.getInitialRoute());
+          Get.offNamed(AppRouter.getInitialRoute());
         }
         // if (Get.find<SplashController>().parser.isNewUser() == false) {
         //   Get.find<SplashController>().parser.saveWelcome(true);
