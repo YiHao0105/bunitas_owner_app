@@ -192,6 +192,18 @@ class _VerifyScreenState extends State<VerifyScreen> {
                                   ),
                                 ),
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          child: Text(
+                            "Home",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                          onTap: () {
+                            Get.back();
+                          },
+                        )
                       ],
                     )
                   : Column(

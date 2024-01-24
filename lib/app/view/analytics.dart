@@ -12,6 +12,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:get/get.dart';
 import 'package:ultimate_salon_owner_flutter/app/controller/analytics_controller.dart';
 import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
+import 'package:ultimate_salon_owner_flutter/app/view/inbox.dart';
 
 class AnalyticScreen extends StatefulWidget {
   const AnalyticScreen({super.key});
@@ -87,1016 +88,1327 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
       return DefaultTabController(
         length: 2,
         child: Scaffold(
-          backgroundColor: ThemeProvider.backgroundColor,
-          appBar: AppBar(
-              backgroundColor: ThemeProvider.appColor,
-              iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-              elevation: 0,
-              centerTitle: true,
-              title: Text(
-                'Analyze'.tr,
-                style: ThemeProvider.titleStyle,
-              ),
-              bottom: TabBar(
-                unselectedLabelColor: ThemeProvider.blackColor,
-                labelColor: ThemeProvider.appColor,
-                indicatorColor: ThemeProvider.appColor,
-                labelStyle: const TextStyle(
-                    fontFamily: 'medium',
-                    fontSize: 16,
-                    color: ThemeProvider.whiteColor),
-                unselectedLabelStyle: const TextStyle(
-                    fontFamily: 'medium',
-                    fontSize: 16,
-                    color: ThemeProvider.whiteColor),
-                indicatorSize: TabBarIndicatorSize.tab,
-                labelPadding: const EdgeInsets.all(8),
-                tabs: [
-                  Text('Appointment'.tr,
-                      style: const TextStyle(color: ThemeProvider.whiteColor)),
-                  Text('Products Order'.tr,
-                      style: const TextStyle(color: ThemeProvider.whiteColor)),
-                ],
-              )),
-          body: TabBarView(
+          // backgroundColor: ThemeProvider.backgroundColor,
+          // appBar: AppBar(
+          //     backgroundColor: ThemeProvider.appColor,
+          //     iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //     elevation: 0,
+          //     centerTitle: true,
+          //     title: Text(
+          //       'Analyze'.tr,
+          //       style: ThemeProvider.titleStyle,
+          //     ),
+          //     bottom: TabBar(
+          //       unselectedLabelColor: ThemeProvider.blackColor,
+          //       labelColor: ThemeProvider.appColor,
+          //       indicatorColor: ThemeProvider.appColor,
+          //       labelStyle: const TextStyle(
+          //           fontFamily: 'medium',
+          //           fontSize: 16,
+          //           color: ThemeProvider.whiteColor),
+          //       unselectedLabelStyle: const TextStyle(
+          //           fontFamily: 'medium',
+          //           fontSize: 16,
+          //           color: ThemeProvider.whiteColor),
+          //       indicatorSize: TabBarIndicatorSize.tab,
+          //       labelPadding: const EdgeInsets.all(8),
+          //       tabs: [
+          //         Text('Appointment'.tr,
+          //             style: const TextStyle(color: ThemeProvider.whiteColor)),
+          //         Text('Products Order'.tr,
+          //             style: const TextStyle(color: ThemeProvider.whiteColor)),
+          //       ],
+          //     )),
+          body: Stack(
             children: [
-              SingleChildScrollView(
-                controller: _scrollControllerAppointments,
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Earnings'.tr,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'medium',
-                            color: ThemeProvider.blackColor),
+              Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 25),
+                    height: 125.0,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            ThemeProvider.whiteColor,
+                            Colors.deepPurple.shade50
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30))),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: Stack(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Analytics'.tr,
+                                  style: const TextStyle(
+                                      color: ThemeProvider.blackColor,
+                                      fontSize: 20,
+                                      fontFamily: 'bold'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: ThemeProvider.whiteColor),
+                                    child: IconButton(
+                                      icon: Icon(
+                                          CupertinoIcons.bubble_middle_bottom),
+                                      onPressed: () {
+                                        Get.to(InboxScreen());
+                                      },
+                                    )),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: CupertinoSlidingSegmentedControl(
-                          groupValue: value.segmentedControlGroupValue,
-                          children: myTabs,
-                          thumbColor: ThemeProvider.appColor,
-                          onValueChanged: (i) {
-                            value.updateSegments(i as int);
-                          }),
-                    ),
-                    const SizedBox(height: 20),
-                    value.segmentedControlGroupValue == 0
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        value.backMonth();
-                                      },
-                                      icon: const Icon(Icons.chevron_left)),
-                                  Text(value.getName()),
-                                  IconButton(
-                                      onPressed: () {
-                                        value.nextMonth();
-                                      },
-                                      icon: const Icon(Icons.chevron_right))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.dailyApiCalled == true
-                                  ? _buildChart()
-                                  : const Center(
-                                      child: CircularProgressIndicator(
-                                        color: ThemeProvider.appColor,
-                                      ),
-                                    ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.list.isNotEmpty
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              value.currencySide == 'left'
-                                                  ? '${value.currencySymbol} ${value.totalPrice}'
-                                                  : '${value.totalPrice} ${value.currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: ThemeProvider.appColor,
-                                                  fontFamily: 'bold'),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Total'.toUpperCase().tr,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: ThemeProvider.appColor,
-                                                  fontFamily: 'bold'),
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              value.currencySide == 'left'
-                                                  ? '${value.currencySymbol} ${value.averagePrice}'
-                                                  : '${value.averagePrice} ${value.currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 14,
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: TabBarView(
+                        children: [
+                          SingleChildScrollView(
+                            controller: _scrollControllerAppointments,
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Earnings'.tr,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'medium',
+                                        color: ThemeProvider.blackColor),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: CupertinoSlidingSegmentedControl(
+                                      groupValue:
+                                          value.segmentedControlGroupValue,
+                                      children: myTabs,
+                                      thumbColor: ThemeProvider.appColor,
+                                      onValueChanged: (i) {
+                                        value.updateSegments(i as int);
+                                      }),
+                                ),
+                                const SizedBox(height: 20),
+                                value.segmentedControlGroupValue == 0
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {
+                                                    value.backMonth();
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.chevron_left)),
+                                              Text(value.getName()),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    value.nextMonth();
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.chevron_right))
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.dailyApiCalled == true
+                                              ? _buildChart()
+                                              : const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color:
+                                                        ThemeProvider.appColor,
+                                                  ),
+                                                ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.list.isNotEmpty
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          value.currencySide ==
+                                                                  'left'
+                                                              ? '${value.currencySymbol} ${value.totalPrice}'
+                                                              : '${value.totalPrice} ${value.currencySymbol}',
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .appColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'Total'
+                                                              .toUpperCase()
+                                                              .tr,
+                                                          style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .appColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          value.currencySide ==
+                                                                  'left'
+                                                              ? '${value.currencySymbol} ${value.averagePrice}'
+                                                              : '${value.averagePrice} ${value.currencySymbol}',
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .greyColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'Average'
+                                                              .toUpperCase()
+                                                              .tr,
+                                                          style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .greyColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              : const SizedBox(),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.list.isNotEmpty
+                                              ? Container(
                                                   color:
-                                                      ThemeProvider.greyColor,
-                                                  fontFamily: 'bold'),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Average'.toUpperCase().tr,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
+                                                      ThemeProvider.whiteColor,
+                                                  width: double.infinity,
+                                                  child: DataTable(
+                                                    columns: <DataColumn>[
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Day'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Bookings'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Earnings'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                    rows: <DataRow>[
+                                                      for (var item
+                                                          in value.list)
+                                                        DataRow(
+                                                          cells: <DataCell>[
+                                                            DataCell(Text(item
+                                                                .dayName
+                                                                .toString())),
+                                                            DataCell(Text(item
+                                                                .count
+                                                                .toString())),
+                                                            DataCell(Text(value
+                                                                        .currencySide ==
+                                                                    'left'
+                                                                ? '${value.currencySymbol} ${item.total}'
+                                                                : '${item.total} ${value.currencySymbol}')),
+                                                          ],
+                                                        ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : const SizedBox()
+                                        ],
+                                      )
+                                    : value.segmentedControlGroupValue == 1
+                                        ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        value.backYear();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.chevron_left)),
+                                                  Text(value.currenyYear
+                                                      .toString()),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        value.nextYear();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.chevron_right))
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.monthlyApiCalled == true
+                                                  ? _buildChartForMonths()
+                                                  : const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: ThemeProvider
+                                                            .appColor,
+                                                      ),
+                                                    ),
+                                              value.monthList.isNotEmpty
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.totalPriceMonth}'
+                                                                  : '${value.totalPriceMonth} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Total'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.averagePriceMonth}'
+                                                                  : '${value.averagePriceMonth} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Average'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.monthList.isNotEmpty
+                                                  ? Container(
+                                                      color: ThemeProvider
+                                                          .whiteColor,
+                                                      width: double.infinity,
+                                                      child: DataTable(
+                                                        columns: <DataColumn>[
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Months'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Bookings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Earnings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                        rows: <DataRow>[
+                                                          for (var item in value
+                                                              .monthList)
+                                                            DataRow(
+                                                              cells: <DataCell>[
+                                                                DataCell(Text(value
+                                                                    .monthsListNames[item
+                                                                        .dayName
+                                                                    as int])),
+                                                                DataCell(Text(item
+                                                                    .count
+                                                                    .toString())),
+                                                                DataCell(Text(value
+                                                                            .currencySide ==
+                                                                        'left'
+                                                                    ? '${value.currencySymbol} ${item.total}'
+                                                                    : '${item.total} ${value.currencySymbol}')),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                            ],
+                                          )
+                                        : Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.yearlyApiCalled == true
+                                                  ? _buildChartForYearly()
+                                                  : const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: ThemeProvider
+                                                            .appColor,
+                                                      ),
+                                                    ),
+                                              value.yearlyList.isNotEmpty
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.totalPriceYearly}'
+                                                                  : '${value.totalPriceYearly} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Total'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.averagePriceYearly}'
+                                                                  : '${value.averagePriceYearly} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Average'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.yearlyList.isNotEmpty
+                                                  ? Container(
+                                                      color: ThemeProvider
+                                                          .whiteColor,
+                                                      width: double.infinity,
+                                                      child: DataTable(
+                                                        columns: <DataColumn>[
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Months'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Bookings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Earnings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                        rows: <DataRow>[
+                                                          for (var item in value
+                                                              .yearlyList)
+                                                            DataRow(
+                                                              cells: <DataCell>[
+                                                                DataCell(Text(item
+                                                                    .dayName
+                                                                    .toString())),
+                                                                DataCell(Text(item
+                                                                    .count
+                                                                    .toString())),
+                                                                DataCell(Text(value
+                                                                            .currencySide ==
+                                                                        'left'
+                                                                    ? '${value.currencySymbol} ${item.total}'
+                                                                    : '${item.total} ${value.currencySymbol}')),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                            ],
+                                          )
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            controller: _scrollControllerProducts,
+                            padding: const EdgeInsets.only(left: 14, top: 14),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Earnings'.tr,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: 'medium',
+                                        color: ThemeProvider.blackColor),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: CupertinoSlidingSegmentedControl(
+                                      groupValue: value
+                                          .segmentedControlGroupValueProducts,
+                                      children: myTabsProducts,
+                                      thumbColor: ThemeProvider.appColor,
+                                      onValueChanged: (i) {
+                                        value.updateSegmentsProducts(i as int);
+                                      }),
+                                ),
+                                const SizedBox(height: 20),
+                                value.segmentedControlGroupValueProducts == 0
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {
+                                                    value.backMonthProducts();
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.chevron_left)),
+                                              Text(value.getNameProducts()),
+                                              IconButton(
+                                                  onPressed: () {
+                                                    value.nextMonthProducts();
+                                                  },
+                                                  icon: const Icon(
+                                                      Icons.chevron_right))
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.dailyApiCalledProducts == true
+                                              ? _buildChartProducts()
+                                              : const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color:
+                                                        ThemeProvider.appColor,
+                                                  ),
+                                                ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.listProducts.isNotEmpty
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          value.currencySide ==
+                                                                  'left'
+                                                              ? '${value.currencySymbol} ${value.totalPriceProducts}'
+                                                              : '${value.totalPriceProducts} ${value.currencySymbol}',
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .appColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'Total'
+                                                              .toUpperCase()
+                                                              .tr,
+                                                          style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .appColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          value.currencySide ==
+                                                                  'left'
+                                                              ? '${value.currencySymbol} ${value.averagePriceProducts}'
+                                                              : '${value.averagePriceProducts} ${value.currencySymbol}',
+                                                          style: const TextStyle(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .greyColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          'Average'
+                                                              .toUpperCase()
+                                                              .tr,
+                                                          style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color:
+                                                                  ThemeProvider
+                                                                      .greyColor,
+                                                              fontFamily:
+                                                                  'bold'),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              : const SizedBox(),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          value.listProducts.isNotEmpty
+                                              ? Container(
                                                   color:
-                                                      ThemeProvider.greyColor,
-                                                  fontFamily: 'bold'),
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  : const SizedBox(),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.list.isNotEmpty
-                                  ? Container(
-                                      color: ThemeProvider.whiteColor,
-                                      width: double.infinity,
-                                      child: DataTable(
-                                        columns: <DataColumn>[
-                                          DataColumn(
-                                            label: Text(
-                                              'Day'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Bookings'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Earnings'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
+                                                      ThemeProvider.whiteColor,
+                                                  width: double.infinity,
+                                                  child: DataTable(
+                                                    columns: <DataColumn>[
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Day'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Orders'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: Text(
+                                                          'Earnings'.tr,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontFamily:
+                                                                      'bold',
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                    rows: <DataRow>[
+                                                      for (var item
+                                                          in value.listProducts)
+                                                        DataRow(
+                                                          cells: <DataCell>[
+                                                            DataCell(Text(item
+                                                                .dayName
+                                                                .toString())),
+                                                            DataCell(Text(item
+                                                                .count
+                                                                .toString())),
+                                                            DataCell(Text(value
+                                                                        .currencySide ==
+                                                                    'left'
+                                                                ? '${value.currencySymbol} ${item.total}'
+                                                                : '${item.total} ${value.currencySymbol}')),
+                                                          ],
+                                                        ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : const SizedBox()
                                         ],
-                                        rows: <DataRow>[
-                                          for (var item in value.list)
-                                            DataRow(
-                                              cells: <DataCell>[
-                                                DataCell(Text(
-                                                    item.dayName.toString())),
-                                                DataCell(Text(
-                                                    item.count.toString())),
-                                                DataCell(Text(value
-                                                            .currencySide ==
-                                                        'left'
-                                                    ? '${value.currencySymbol} ${item.total}'
-                                                    : '${item.total} ${value.currencySymbol}')),
-                                              ],
-                                            ),
-                                        ],
-                                      ),
-                                    )
-                                  : const SizedBox()
-                            ],
+                                      )
+                                    : value.segmentedControlGroupValueProducts ==
+                                            1
+                                        ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        value
+                                                            .backYearProducts();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.chevron_left)),
+                                                  Text(value.currenyYearProducts
+                                                      .toString()),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        value
+                                                            .nextYearProducts();
+                                                      },
+                                                      icon: const Icon(
+                                                          Icons.chevron_right))
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.monthlyApiCalledProducts ==
+                                                      true
+                                                  ? _buildChartForMonthsProducts()
+                                                  : const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: ThemeProvider
+                                                            .appColor,
+                                                      ),
+                                                    ),
+                                              value.monthListProducts.isNotEmpty
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.totalPriceMonthProducts}'
+                                                                  : '${value.totalPriceMonthProducts} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Total'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.averagePriceMonthProducts}'
+                                                                  : '${value.averagePriceMonthProducts} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Average'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.monthListProducts.isNotEmpty
+                                                  ? Container(
+                                                      color: ThemeProvider
+                                                          .whiteColor,
+                                                      width: double.infinity,
+                                                      child: DataTable(
+                                                        columns: <DataColumn>[
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Months'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Orders'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Earnings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                        rows: <DataRow>[
+                                                          for (var item in value
+                                                              .monthListProducts)
+                                                            DataRow(
+                                                              cells: <DataCell>[
+                                                                DataCell(Text(value
+                                                                    .monthsListNames[item
+                                                                        .dayName
+                                                                    as int])),
+                                                                DataCell(Text(item
+                                                                    .count
+                                                                    .toString())),
+                                                                DataCell(Text(value
+                                                                            .currencySide ==
+                                                                        'left'
+                                                                    ? '${value.currencySymbol} ${item.total}'
+                                                                    : '${item.total} ${value.currencySymbol}')),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                            ],
+                                          )
+                                        : Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.yearlyApiCalledProducts ==
+                                                      true
+                                                  ? _buildChartForYearlyProducts()
+                                                  : const Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: ThemeProvider
+                                                            .appColor,
+                                                      ),
+                                                    ),
+                                              value.yearlyListProducts
+                                                      .isNotEmpty
+                                                  ? Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.totalPriceYearlyProducts}'
+                                                                  : '${value.totalPriceYearlyProducts} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Total'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .appColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              value.currencySide ==
+                                                                      'left'
+                                                                  ? '${value.currencySymbol} ${value.averagePriceYearlyProducts}'
+                                                                  : '${value.averagePriceYearlyProducts} ${value.currencySymbol}',
+                                                              style: const TextStyle(
+                                                                  fontSize: 14,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 5,
+                                                            ),
+                                                            Text(
+                                                              'Average'
+                                                                  .toUpperCase()
+                                                                  .tr,
+                                                              style: const TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: ThemeProvider
+                                                                      .greyColor,
+                                                                  fontFamily:
+                                                                      'bold'),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              value.yearlyListProducts
+                                                      .isNotEmpty
+                                                  ? Container(
+                                                      color: ThemeProvider
+                                                          .whiteColor,
+                                                      width: double.infinity,
+                                                      child: DataTable(
+                                                        columns: <DataColumn>[
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Months'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Orders'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                          DataColumn(
+                                                            label: Text(
+                                                              'Earnings'.tr,
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontFamily:
+                                                                          'bold',
+                                                                      fontSize:
+                                                                          10),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                        rows: <DataRow>[
+                                                          for (var item in value
+                                                              .yearlyListProducts)
+                                                            DataRow(
+                                                              cells: <DataCell>[
+                                                                DataCell(Text(item
+                                                                    .dayName
+                                                                    .toString())),
+                                                                DataCell(Text(item
+                                                                    .count
+                                                                    .toString())),
+                                                                DataCell(Text(value
+                                                                            .currencySide ==
+                                                                        'left'
+                                                                    ? '${value.currencySymbol} ${item.total}'
+                                                                    : '${item.total} ${value.currencySymbol}')),
+                                                              ],
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : const SizedBox()
+                                            ],
+                                          )
+                              ],
+                            ),
                           )
-                        : value.segmentedControlGroupValue == 1
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            value.backYear();
-                                          },
-                                          icon: const Icon(Icons.chevron_left)),
-                                      Text(value.currenyYear.toString()),
-                                      IconButton(
-                                          onPressed: () {
-                                            value.nextYear();
-                                          },
-                                          icon: const Icon(Icons.chevron_right))
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.monthlyApiCalled == true
-                                      ? _buildChartForMonths()
-                                      : const Center(
-                                          child: CircularProgressIndicator(
-                                            color: ThemeProvider.appColor,
-                                          ),
-                                        ),
-                                  value.monthList.isNotEmpty
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.totalPriceMonth}'
-                                                      : '${value.totalPriceMonth} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Total'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.averagePriceMonth}'
-                                                      : '${value.averagePriceMonth} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Average'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.monthList.isNotEmpty
-                                      ? Container(
-                                          color: ThemeProvider.whiteColor,
-                                          width: double.infinity,
-                                          child: DataTable(
-                                            columns: <DataColumn>[
-                                              DataColumn(
-                                                label: Text(
-                                                  'Months'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Bookings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Earnings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                            ],
-                                            rows: <DataRow>[
-                                              for (var item in value.monthList)
-                                                DataRow(
-                                                  cells: <DataCell>[
-                                                    DataCell(Text(value
-                                                            .monthsListNames[
-                                                        item.dayName as int])),
-                                                    DataCell(Text(
-                                                        item.count.toString())),
-                                                    DataCell(Text(value
-                                                                .currencySide ==
-                                                            'left'
-                                                        ? '${value.currencySymbol} ${item.total}'
-                                                        : '${item.total} ${value.currencySymbol}')),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.yearlyApiCalled == true
-                                      ? _buildChartForYearly()
-                                      : const Center(
-                                          child: CircularProgressIndicator(
-                                            color: ThemeProvider.appColor,
-                                          ),
-                                        ),
-                                  value.yearlyList.isNotEmpty
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.totalPriceYearly}'
-                                                      : '${value.totalPriceYearly} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Total'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.averagePriceYearly}'
-                                                      : '${value.averagePriceYearly} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Average'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.yearlyList.isNotEmpty
-                                      ? Container(
-                                          color: ThemeProvider.whiteColor,
-                                          width: double.infinity,
-                                          child: DataTable(
-                                            columns: <DataColumn>[
-                                              DataColumn(
-                                                label: Text(
-                                                  'Months'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Bookings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Earnings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                            ],
-                                            rows: <DataRow>[
-                                              for (var item in value.yearlyList)
-                                                DataRow(
-                                                  cells: <DataCell>[
-                                                    DataCell(Text(item.dayName
-                                                        .toString())),
-                                                    DataCell(Text(
-                                                        item.count.toString())),
-                                                    DataCell(Text(value
-                                                                .currencySide ==
-                                                            'left'
-                                                        ? '${value.currencySymbol} ${item.total}'
-                                                        : '${item.total} ${value.currencySymbol}')),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              )
-                  ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 100, left: 25, right: 25),
+                child: Container(
+                  height: 50.0, // Adjust the height of the tab bar as needed
+                  decoration: BoxDecoration(
+                      color: ThemeProvider.whiteColor, // Color of the tab bar
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(color: ThemeProvider.appColor)),
+                  child: TabBar(
+                    unselectedLabelColor: Colors.grey.shade600,
+                    labelStyle: TextStyle(
+                        fontSize: 16, fontFamily: 'bold', color: Colors.white),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorPadding: EdgeInsets.all(4),
+                    dividerColor: Colors.transparent,
+                    indicator: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(50), // Creates border
+                        color: ThemeProvider.appColor),
+                    // controller: value.tabController,
+                    tabs: [
+                      Tab(
+                        text: 'Appointment',
+                      ),
+                      Tab(text: 'Products Order'),
+                    ],
+                  ),
                 ),
               ),
-              SingleChildScrollView(
-                controller: _scrollControllerProducts,
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        'Earnings'.tr,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'medium',
-                            color: ThemeProvider.blackColor),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      child: CupertinoSlidingSegmentedControl(
-                          groupValue: value.segmentedControlGroupValueProducts,
-                          children: myTabsProducts,
-                          thumbColor: ThemeProvider.appColor,
-                          onValueChanged: (i) {
-                            value.updateSegmentsProducts(i as int);
-                          }),
-                    ),
-                    const SizedBox(height: 20),
-                    value.segmentedControlGroupValueProducts == 0
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                      onPressed: () {
-                                        value.backMonthProducts();
-                                      },
-                                      icon: const Icon(Icons.chevron_left)),
-                                  Text(value.getNameProducts()),
-                                  IconButton(
-                                      onPressed: () {
-                                        value.nextMonthProducts();
-                                      },
-                                      icon: const Icon(Icons.chevron_right))
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.dailyApiCalledProducts == true
-                                  ? _buildChartProducts()
-                                  : const Center(
-                                      child: CircularProgressIndicator(
-                                        color: ThemeProvider.appColor,
-                                      ),
-                                    ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.listProducts.isNotEmpty
-                                  ? Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              value.currencySide == 'left'
-                                                  ? '${value.currencySymbol} ${value.totalPriceProducts}'
-                                                  : '${value.totalPriceProducts} ${value.currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  color: ThemeProvider.appColor,
-                                                  fontFamily: 'bold'),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Total'.toUpperCase().tr,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: ThemeProvider.appColor,
-                                                  fontFamily: 'bold'),
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              value.currencySide == 'left'
-                                                  ? '${value.currencySymbol} ${value.averagePriceProducts}'
-                                                  : '${value.averagePriceProducts} ${value.currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 14,
-                                                  color:
-                                                      ThemeProvider.greyColor,
-                                                  fontFamily: 'bold'),
-                                            ),
-                                            const SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Average'.toUpperCase().tr,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color:
-                                                      ThemeProvider.greyColor,
-                                                  fontFamily: 'bold'),
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  : const SizedBox(),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              value.listProducts.isNotEmpty
-                                  ? Container(
-                                      color: ThemeProvider.whiteColor,
-                                      width: double.infinity,
-                                      child: DataTable(
-                                        columns: <DataColumn>[
-                                          DataColumn(
-                                            label: Text(
-                                              'Day'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Orders'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
-                                          DataColumn(
-                                            label: Text(
-                                              'Earnings'.tr,
-                                              style: const TextStyle(
-                                                  fontFamily: 'bold',
-                                                  fontSize: 10),
-                                            ),
-                                          ),
-                                        ],
-                                        rows: <DataRow>[
-                                          for (var item in value.listProducts)
-                                            DataRow(
-                                              cells: <DataCell>[
-                                                DataCell(Text(
-                                                    item.dayName.toString())),
-                                                DataCell(Text(
-                                                    item.count.toString())),
-                                                DataCell(Text(value
-                                                            .currencySide ==
-                                                        'left'
-                                                    ? '${value.currencySymbol} ${item.total}'
-                                                    : '${item.total} ${value.currencySymbol}')),
-                                              ],
-                                            ),
-                                        ],
-                                      ),
-                                    )
-                                  : const SizedBox()
-                            ],
-                          )
-                        : value.segmentedControlGroupValueProducts == 1
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            value.backYearProducts();
-                                          },
-                                          icon: const Icon(Icons.chevron_left)),
-                                      Text(
-                                          value.currenyYearProducts.toString()),
-                                      IconButton(
-                                          onPressed: () {
-                                            value.nextYearProducts();
-                                          },
-                                          icon: const Icon(Icons.chevron_right))
-                                    ],
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.monthlyApiCalledProducts == true
-                                      ? _buildChartForMonthsProducts()
-                                      : const Center(
-                                          child: CircularProgressIndicator(
-                                            color: ThemeProvider.appColor,
-                                          ),
-                                        ),
-                                  value.monthListProducts.isNotEmpty
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.totalPriceMonthProducts}'
-                                                      : '${value.totalPriceMonthProducts} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Total'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.averagePriceMonthProducts}'
-                                                      : '${value.averagePriceMonthProducts} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Average'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.monthListProducts.isNotEmpty
-                                      ? Container(
-                                          color: ThemeProvider.whiteColor,
-                                          width: double.infinity,
-                                          child: DataTable(
-                                            columns: <DataColumn>[
-                                              DataColumn(
-                                                label: Text(
-                                                  'Months'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Orders'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Earnings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                            ],
-                                            rows: <DataRow>[
-                                              for (var item
-                                                  in value.monthListProducts)
-                                                DataRow(
-                                                  cells: <DataCell>[
-                                                    DataCell(Text(value
-                                                            .monthsListNames[
-                                                        item.dayName as int])),
-                                                    DataCell(Text(
-                                                        item.count.toString())),
-                                                    DataCell(Text(value
-                                                                .currencySide ==
-                                                            'left'
-                                                        ? '${value.currencySymbol} ${item.total}'
-                                                        : '${item.total} ${value.currencySymbol}')),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              )
-                            : Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.yearlyApiCalledProducts == true
-                                      ? _buildChartForYearlyProducts()
-                                      : const Center(
-                                          child: CircularProgressIndicator(
-                                            color: ThemeProvider.appColor,
-                                          ),
-                                        ),
-                                  value.yearlyListProducts.isNotEmpty
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.totalPriceYearlyProducts}'
-                                                      : '${value.totalPriceYearlyProducts} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Total'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .appColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              width: 20,
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  value.currencySide == 'left'
-                                                      ? '${value.currencySymbol} ${value.averagePriceYearlyProducts}'
-                                                      : '${value.averagePriceYearlyProducts} ${value.currencySymbol}',
-                                                  style: const TextStyle(
-                                                      fontSize: 14,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Text(
-                                                  'Average'.toUpperCase().tr,
-                                                  style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: ThemeProvider
-                                                          .greyColor,
-                                                      fontFamily: 'bold'),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox(),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  value.yearlyListProducts.isNotEmpty
-                                      ? Container(
-                                          color: ThemeProvider.whiteColor,
-                                          width: double.infinity,
-                                          child: DataTable(
-                                            columns: <DataColumn>[
-                                              DataColumn(
-                                                label: Text(
-                                                  'Months'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Orders'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                              DataColumn(
-                                                label: Text(
-                                                  'Earnings'.tr,
-                                                  style: const TextStyle(
-                                                      fontFamily: 'bold',
-                                                      fontSize: 10),
-                                                ),
-                                              ),
-                                            ],
-                                            rows: <DataRow>[
-                                              for (var item
-                                                  in value.yearlyListProducts)
-                                                DataRow(
-                                                  cells: <DataCell>[
-                                                    DataCell(Text(item.dayName
-                                                        .toString())),
-                                                    DataCell(Text(
-                                                        item.count.toString())),
-                                                    DataCell(Text(value
-                                                                .currencySide ==
-                                                            'left'
-                                                        ? '${value.currencySymbol} ${item.total}'
-                                                        : '${item.total} ${value.currencySymbol}')),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              )
-                  ],
-                ),
-              )
             ],
           ),
         ),

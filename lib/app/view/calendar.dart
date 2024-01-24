@@ -6,6 +6,7 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2023-present initappz.
 */
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:ultimate_salon_owner_flutter/app/controller/calendar_controller.dart';
 import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
 import 'package:ultimate_salon_owner_flutter/app/env.dart';
+import 'package:ultimate_salon_owner_flutter/app/view/inbox.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -44,7 +46,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
           appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
             elevation: 0,
             toolbarHeight: 50,
             iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
@@ -58,10 +59,88 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             bottom: value.apiCalled == true
                 ? PreferredSize(
-                    preferredSize: const Size.fromHeight(300),
-                    child: Container(
-                        child: _getAgendaViewCalendar(
-                            value.events, _onViewChanged, _calendarController)),
+                    preferredSize: const Size.fromHeight(360),
+                    child: Stack(
+                      children: [
+                        Container(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Stack(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Calender'.tr,
+                                        style: const TextStyle(
+                                            color: ThemeProvider.blackColor,
+                                            fontSize: 20,
+                                            fontFamily: 'bold'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeProvider.whiteColor),
+                                          child: IconButton(
+                                            icon: Icon(CupertinoIcons
+                                                .bubble_middle_bottom),
+                                            onPressed: () {
+                                              Get.to(InboxScreen());
+                                            },
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  ThemeProvider.whiteColor,
+                                  Colors.deepPurple.shade50
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30))),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15.0, right: 15.0, top: 80),
+                          child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ThemeProvider.appColor
+                                          .withOpacity(0.2),
+                                      blurRadius: 5.0,
+                                    ),
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(25)),
+                              child: _getAgendaViewCalendar(value.events,
+                                  _onViewChanged, _calendarController)),
+                        ),
+                      ],
+                    ),
                   )
                 : null,
           ),
@@ -610,6 +689,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       showDatePickerButton: true,
       onViewChanged: onViewChanged,
       backgroundColor: ThemeProvider.whiteColor,
+      cellBorderColor: Colors.transparent,
       dataSource: calendarDataSource,
       monthViewSettings:
           const MonthViewSettings(showAgenda: false, numberOfWeeksInView: 4),

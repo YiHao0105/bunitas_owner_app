@@ -1481,6 +1481,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               color: ThemeProvider.whiteColor,
                                               fontFamily: 'bold'),
                                         )),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    InkWell(
+                                      child: Text(
+                                        "Home",
+                                        style: TextStyle(fontSize: 17),
+                                      ),
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    )
                                   ],
                                 ),
                               ),

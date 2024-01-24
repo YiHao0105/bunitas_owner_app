@@ -23,9 +23,9 @@ class TabsController extends GetxController with GetTickerProviderStateMixin imp
     super.onInit();
     subType = parser.getSubType();
     if (subType == "Products Only"){
-      tabController = TabController(length: 5, vsync: this, initialIndex: tabId);
+      tabController = TabController(length: 4, vsync: this, initialIndex: tabId);
     }else{
-      tabController = TabController(length: 6, vsync: this, initialIndex: tabId);
+      tabController = TabController(length: 5, vsync: this, initialIndex: tabId);
     }
   }
 

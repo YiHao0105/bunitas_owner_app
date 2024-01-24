@@ -30,28 +30,27 @@ class _TabScreenState extends State<TabScreen> {
   Widget build(BuildContext context) {
     List<Widget> pages;
     return GetBuilder<TabsController>(builder: (value) {
-
       if (value.subType == "Products Only") {
-        pages =  [
+        pages = [
           HistoryScreen(),
           AnalyticScreen(),
           CalendarScreen(),
-          InboxScreen(),
+          // InboxScreen(),
           ProfileScreen()
         ];
-      }else{
-        pages =  [
+      } else {
+        pages = [
           AppointmentScreen(),
           HistoryScreen(),
           AnalyticScreen(),
           CalendarScreen(),
-          InboxScreen(),
+          // InboxScreen(),
           ProfileScreen()
         ];
       }
 
       return DefaultTabController(
-        length: value.subType == "Products Only" ? 5 : 6,
+        length: value.subType == "Products Only" ? 4 : 5,
         child: Scaffold(
           backgroundColor: Colors.white,
           bottomNavigationBar: Container(
@@ -66,8 +65,10 @@ class _TabScreenState extends State<TabScreen> {
                         haptic: false,
                         curve: Curves.easeOutExpo,
                         tabBorderRadius: 15,
-                        textStyle: const TextStyle(fontSize: 15,
-                            fontFamily: 'bold', color: Colors.white),
+                        textStyle: const TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'bold',
+                            color: Colors.white),
                         duration: const Duration(milliseconds: 300),
                         gap: 5,
                         color: Colors.grey.shade400,
@@ -91,11 +92,11 @@ class _TabScreenState extends State<TabScreen> {
                             text: 'Calendar'.tr,
                             backgroundColor: ThemeProvider.appColor,
                           ),
-                          GButton(
-                            icon: Icons.chat_outlined,
-                            text: 'Chat'.tr,
-                            backgroundColor: ThemeProvider.appColor,
-                          ),
+                          // GButton(
+                          //   icon: Icons.chat_outlined,
+                          //   text: 'Chat'.tr,
+                          //   backgroundColor: ThemeProvider.appColor,
+                          // ),
                           GButton(
                             icon: Icons.person_outlined,
                             text: 'Profile'.tr,
@@ -113,8 +114,10 @@ class _TabScreenState extends State<TabScreen> {
                         haptic: false,
                         curve: Curves.easeOutExpo,
                         tabBorderRadius: 15,
-                        textStyle: const TextStyle(fontSize: 15,
-                            fontFamily: 'bold', color: Colors.white),
+                        textStyle: const TextStyle(
+                            fontSize: 15,
+                            fontFamily: 'bold',
+                            color: Colors.white),
                         duration: const Duration(milliseconds: 300),
                         gap: 5,
                         color: Colors.grey.shade400,
@@ -143,11 +146,11 @@ class _TabScreenState extends State<TabScreen> {
                             text: 'Calendar'.tr,
                             backgroundColor: ThemeProvider.appColor,
                           ),
-                          GButton(
-                            icon: Icons.chat_outlined,
-                            text: 'Chat'.tr,
-                            backgroundColor: ThemeProvider.appColor,
-                          ),
+                          // GButton(
+                          //   icon: Icons.chat_outlined,
+                          //   text: 'Chat'.tr,
+                          //   backgroundColor: ThemeProvider.appColor,
+                          // ),
                           GButton(
                             icon: Icons.person_outlined,
                             text: 'Profile'.tr,
