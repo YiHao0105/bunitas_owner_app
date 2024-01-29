@@ -27,8 +27,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
       builder: (value) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+            
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30))),
+            backgroundColor: ThemeProvider.appColor.withOpacity(0.1),
+            iconTheme: const IconThemeData(color: ThemeProvider.blackColor),
             centerTitle: true,
             elevation: 0,
             toolbarHeight: 50,
@@ -36,7 +41,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               'Products'.tr,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.start,
-              style: ThemeProvider.titleStyle,
+              style: TextStyle(color: Colors.black, fontFamily: 'bold'),
             ),
             actions: [
               Padding(
@@ -64,7 +69,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 10.0, vertical: 10.0),
+                      horizontal: 30.0, vertical: 10.0),
                   child: SizedBox(
                     height: 40,
                     child: TextField(
@@ -259,8 +264,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                                                             ThemeProvider.backgroundColor,
                                                                         backgroundColor:
                                                                             ThemeProvider.redColor,
-                                                                        minimumSize:
-                                                                            const Size.fromHeight(35),
+                                                                        minimumSize: const Size
+                                                                            .fromHeight(
+                                                                            35),
                                                                         shape:
                                                                             RoundedRectangleBorder(
                                                                           borderRadius:
@@ -300,8 +306,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                                                             ThemeProvider.backgroundColor,
                                                                         backgroundColor:
                                                                             ThemeProvider.greenColor,
-                                                                        minimumSize:
-                                                                            const Size.fromHeight(35),
+                                                                        minimumSize: const Size
+                                                                            .fromHeight(
+                                                                            35),
                                                                         shape:
                                                                             RoundedRectangleBorder(
                                                                           borderRadius:
@@ -345,45 +352,47 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       RichText(
                                         text: TextSpan(
                                           children: [
-                                            item.discount != 0.0 ?
-                                            TextSpan(
-                                              text: Get.find<ProductsController>()
-                                                          .currencySide ==
-                                                      'left'
-                                                  ? '${Get.find<ProductsController>().currencySymbol}${item.originalPrice.toString()}'
-                                                  : '  ${item.originalPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color:
-                                                      ThemeProvider.greyColor,
-                                                  decoration: TextDecoration
-                                                      .lineThrough),
-                                            ):
-                                            TextSpan(
-                                              text: Get.find<ProductsController>()
-                                                  .currencySide ==
-                                                  'left'
-                                                  ? '${Get.find<ProductsController>().currencySymbol}${item.originalPrice.toString()}'
-                                                  : '  ${item.originalPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color: ThemeProvider.greenColor,
-                                                  fontFamily: 'bold'),
-                                            ),
-
-                                            item.discount != 0.0 ?
-                                            TextSpan(
-                                              text: Get.find<ProductsController>()
-                                                          .currencySide ==
-                                                      'left'
-                                                  ? '   ${Get.find<ProductsController>().currencySymbol}${item.sellPrice.toString()}'
-                                                  : '  ${item.sellPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  color:
-                                                      ThemeProvider.greenColor,
-                                                  fontFamily: 'bold'),
-                                            ) : TextSpan(text: ""),
+                                            item.discount != 0.0
+                                                ? TextSpan(
+                                                    text: Get.find<ProductsController>()
+                                                                .currencySide ==
+                                                            'left'
+                                                        ? '${Get.find<ProductsController>().currencySymbol}${item.originalPrice.toString()}'
+                                                        : '  ${item.originalPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        color: ThemeProvider
+                                                            .greyColor,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough),
+                                                  )
+                                                : TextSpan(
+                                                    text: Get.find<ProductsController>()
+                                                                .currencySide ==
+                                                            'left'
+                                                        ? '${Get.find<ProductsController>().currencySymbol}${item.originalPrice.toString()}'
+                                                        : '  ${item.originalPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        color: ThemeProvider
+                                                            .greenColor,
+                                                        fontFamily: 'bold'),
+                                                  ),
+                                            item.discount != 0.0
+                                                ? TextSpan(
+                                                    text: Get.find<ProductsController>()
+                                                                .currencySide ==
+                                                            'left'
+                                                        ? '   ${Get.find<ProductsController>().currencySymbol}${item.sellPrice.toString()}'
+                                                        : '  ${item.sellPrice.toString()}${Get.find<ProductsController>().currencySymbol}',
+                                                    style: const TextStyle(
+                                                        fontSize: 12,
+                                                        color: ThemeProvider
+                                                            .greenColor,
+                                                        fontFamily: 'bold'),
+                                                  )
+                                                : TextSpan(text: ""),
                                           ],
                                         ),
                                       ),

@@ -57,111 +57,174 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           ),
           body: CustomScrollView(
             slivers: [
-              SliverAppBar(
-                backgroundColor: ThemeProvider.appColor,
-                floating: true,
-                pinned: true,
-                snap: false,
-                elevation: 0,
-                forceElevated: true,
-                iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-                titleSpacing: 0,
-                centerTitle: true,
-                title: Text(
-                  'Contact Us'.tr,
-                  style: ThemeProvider.titleStyle,
-                ),
-              ),
+              // SliverAppBar(
+              //   backgroundColor: ThemeProvider.appColor,
+              //   floating: true,
+              //   pinned: true,
+              //   snap: false,
+              //   elevation: 0,
+              //   forceElevated: true,
+              //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+              //   titleSpacing: 0,
+              //   centerTitle: true,
+              //   title: Text(
+              //     'Contact Us'.tr,
+              //     style: ThemeProvider.titleStyle,
+              //   ),
+              // ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: TextField(
-                                  controller: value.nameContact,
-                                  decoration: InputDecoration(
-                                    hintText: 'Full Name'.tr,
-                                    hintStyle: const TextStyle(
-                                        color: ThemeProvider.appColor,
-                                        fontSize: 15),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding: const EdgeInsets.only(
-                                        bottom: 8.0, top: 14.0),
-                                    focusedBorder: const UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: ThemeProvider.appColor),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 25),
+                          height: 125.0,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  ThemeProvider.whiteColor,
+                                  Colors.deepPurple.shade50
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(30),
+                                  bottomRight: Radius.circular(30))),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: Stack(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Contact Us'.tr,
+                                        style: const TextStyle(
+                                            color: ThemeProvider.blackColor,
+                                            fontSize: 20,
+                                            fontFamily: 'bold'),
+                                      ),
                                     ),
-                                    enabledBorder: const UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey)),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 8.0, left: 8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeProvider.whiteColor),
+                                          child: IconButton(
+                                            icon: Icon(Icons.arrow_back),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                          )),
+                                    ],
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: TextField(
-                                  controller: value.emailContanct,
-                                  decoration: InputDecoration(
-                                    hintText: 'Email Address'.tr,
-                                    hintStyle: const TextStyle(
-                                        color: ThemeProvider.appColor,
-                                        fontSize: 15),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding: const EdgeInsets.only(
-                                        bottom: 8.0, top: 14.0),
-                                    focusedBorder: const UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: ThemeProvider.appColor),
-                                    ),
-                                    enabledBorder: const UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: SizedBox(
-                                width: double.infinity,
-                                child: TextField(
-                                  maxLines: 5,
-                                  controller: value.messageContanct,
-                                  decoration: InputDecoration(
-                                    hintText: 'Message'.tr,
-                                    hintStyle: const TextStyle(
-                                        color: ThemeProvider.appColor,
-                                        fontSize: 15),
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    contentPadding: const EdgeInsets.only(
-                                        bottom: 8.0, top: 14.0),
-                                    focusedBorder: const UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: ThemeProvider.appColor),
-                                    ),
-                                    enabledBorder: const UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.grey)),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: TextField(
+                                    controller: value.nameContact,
+                                    decoration: InputDecoration(
+                                      hintText: 'Full Name'.tr,
+                                      hintStyle: const TextStyle(
+                                          color: ThemeProvider.appColor,
+                                          fontSize: 15),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding: const EdgeInsets.only(
+                                          bottom: 8.0, top: 14.0),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: ThemeProvider.appColor),
+                                      ),
+                                      enabledBorder: const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: TextField(
+                                    controller: value.emailContanct,
+                                    decoration: InputDecoration(
+                                      hintText: 'Email Address'.tr,
+                                      hintStyle: const TextStyle(
+                                          color: ThemeProvider.appColor,
+                                          fontSize: 15),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding: const EdgeInsets.only(
+                                          bottom: 8.0, top: 14.0),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: ThemeProvider.appColor),
+                                      ),
+                                      enabledBorder: const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: TextField(
+                                    maxLines: 5,
+                                    controller: value.messageContanct,
+                                    decoration: InputDecoration(
+                                      hintText: 'Message'.tr,
+                                      hintStyle: const TextStyle(
+                                          color: ThemeProvider.appColor,
+                                          fontSize: 15),
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding: const EdgeInsets.only(
+                                          bottom: 8.0, top: 14.0),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: ThemeProvider.appColor),
+                                      ),
+                                      enabledBorder: const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

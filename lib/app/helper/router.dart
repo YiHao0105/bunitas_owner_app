@@ -250,7 +250,7 @@ class AppRouter {
         binding: ChatBinding()),
     GetPage(
         name: historyRoutes,
-        page: () => const HistoryScreen(),
+        page: () =>  HistoryScreen(booleanVal: true,),
         binding: HistoryBinding()),
     GetPage(
         name: stylistRoutes,

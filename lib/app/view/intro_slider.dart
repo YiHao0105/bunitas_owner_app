@@ -9,7 +9,6 @@ import 'package:introduction_slider/source/presentation/widgets/introduction_sli
 import 'package:ultimate_salon_owner_flutter/app/helper/router.dart';
 import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
 
-
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});
 

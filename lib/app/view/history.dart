@@ -16,7 +16,11 @@ import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
 import 'package:ultimate_salon_owner_flutter/app/view/inbox.dart';
 
 class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+  bool booleanVal;
+   HistoryScreen({Key? key, required this.booleanVal})
+      : super(
+          key: key,
+        );
 
   @override
   State<HistoryScreen> createState() => _HistoryScreenState();
@@ -106,10 +110,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: const EdgeInsets.only(
+                                      left: 8.0, right: 8.0),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
+                                      Visibility(
+                                        visible: widget.booleanVal,
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                color:
+                                                    ThemeProvider.whiteColor),
+                                            child: IconButton(
+                                              icon: Icon(Icons.arrow_back),
+                                              onPressed: () {
+                                                Get.back();
+                                                widget.booleanVal = true;
+                                              },
+                                            )),
+                                      ),
                                       Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -119,7 +141,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                             icon: Icon(CupertinoIcons
                                                 .bubble_middle_bottom),
                                             onPressed: () {
-                                               Get.to(InboxScreen());
+                                              Get.to(InboxScreen());
                                             },
                                           )),
                                     ],
