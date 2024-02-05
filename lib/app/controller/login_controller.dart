@@ -30,6 +30,7 @@ class LoginController extends GetxController implements GetxService {
   final LoginParser parser;
 
   String title = 'signin';
+  String loginType = "Phone Number";
   final emailTextEditor = TextEditingController();
   final passwordTextEditor = TextEditingController();
   final mobileNo = TextEditingController();
@@ -115,7 +116,7 @@ class LoginController extends GetxController implements GetxService {
     );
 
     var response = await parser.onLogin(body);
-    print("HelloLoginUser===>"+response.bodyString.toString());
+    print("HelloLoginUser===>" + response.bodyString.toString());
     Get.back();
     if (response.statusCode == 200) {
       Map<String, dynamic> myMap = Map<String, dynamic>.from(response.body);
@@ -130,34 +131,37 @@ class LoginController extends GetxController implements GetxService {
         parser.saveToken(myMap['token']);
 
         String subtype = "";
-        if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'salon'){
+        if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'salon') {
           subtype = "Hair & Nails Salon";
-        }else if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'individual'){
+        } else if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'individual') {
           subtype = "Mobile Beautifician";
-        }else{
+        } else {
           subtype = myMap['user']['sub_type'].toString();
         }
 
-
         parser.saveInfo(
-            myMap['user']['id'].toString(),
-            myMap['user']['first_name'].toString(),
-            myMap['user']['last_name'].toString(),
-            myMap['user']['cover'].toString(),
-            myMap['user']['email'].toString(),
-            myMap['user']['mobile'].toString(),
-            myMap['user']['type'].toString(),
-            subtype,
+          myMap['user']['id'].toString(),
+          myMap['user']['first_name'].toString(),
+          myMap['user']['last_name'].toString(),
+          myMap['user']['cover'].toString(),
+          myMap['user']['email'].toString(),
+          myMap['user']['mobile'].toString(),
+          myMap['user']['type'].toString(),
+          subtype,
         );
-        
+
         if (myMap['user']['type'].toString() == 'individual') {
           parser.saveOtherInfo(
               '${myMap['user']['first_name']} ${myMap['user']['last_name']}',
               myMap['user']['cover'].toString(),
               myMap['individual']['background'].toString(),
               double.parse(myMap['individual']['rating'].toString()),
-              myMap['individual']['total_rating'].toString(), myMap['individual']['in_home'].toString(),
-              myMap['individual']['have_shop'].toString(), myMap['individual']['id'].toString());
+              myMap['individual']['total_rating'].toString(),
+              myMap['individual']['in_home'].toString(),
+              myMap['individual']['have_shop'].toString(),
+              myMap['individual']['id'].toString());
         } else {
           parser.saveOtherInfo(
               myMap['salon']['name'].toString(),
@@ -166,7 +170,8 @@ class LoginController extends GetxController implements GetxService {
               double.parse(myMap['salon']['rating'].toString()),
               myMap['salon']['total_rating'].toString(),
               myMap['salon']['in_home'].toString(),
-              myMap['salon']['have_shop'].toString(), myMap['salon']['id'].toString());
+              myMap['salon']['have_shop'].toString(),
+              myMap['salon']['id'].toString());
         }
         var updateParam = {
           "id": myMap['user']['id'].toString(),
@@ -236,7 +241,7 @@ class LoginController extends GetxController implements GetxService {
       'password': passwordTextEditor.text
     };
     Response response = await parser.loginWithPhonePasswordPost(param);
-    print("HelloLoginUser===>"+response.bodyString.toString());
+    print("HelloLoginUser===>" + response.bodyString.toString());
     Get.back();
     if (response.statusCode == 200) {
       debugPrint(response.bodyString);
@@ -248,11 +253,13 @@ class LoginController extends GetxController implements GetxService {
         parser.saveToken(myMap['token']);
 
         String subtype = "";
-        if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'salon'){
+        if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'salon') {
           subtype = "Hair & Nails Salon";
-        }else if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'individual'){
+        } else if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'individual') {
           subtype = "Mobile Beautifician";
-        }else{
+        } else {
           subtype = myMap['user']['sub_type'].toString();
         }
 
@@ -266,17 +273,18 @@ class LoginController extends GetxController implements GetxService {
             myMap['user']['type'].toString(),
             subtype);
 
-        print("HelloIndividualId"+ myMap['user']['id'].toString());
+        print("HelloIndividualId" + myMap['user']['id'].toString());
         if (myMap['user']['type'].toString() == 'individual') {
           parser.saveOtherInfo(
               '${myMap['user']['first_name']} ${myMap['user']['last_name']}',
               myMap['user']['cover'].toString(),
               myMap['individual']['background'].toString(),
               double.parse(myMap['individual']['rating'].toString()),
-              myMap['individual']['total_rating'].toString(), myMap['individual']['in_home'].toString(),
-              myMap['individual']['have_shop'].toString(), myMap['individual']['id'].toString());
-        }
-        else {
+              myMap['individual']['total_rating'].toString(),
+              myMap['individual']['in_home'].toString(),
+              myMap['individual']['have_shop'].toString(),
+              myMap['individual']['id'].toString());
+        } else {
           parser.saveOtherInfo(
               myMap['salon']['name'].toString(),
               myMap['salon']['cover'].toString(),
@@ -284,8 +292,8 @@ class LoginController extends GetxController implements GetxService {
               double.parse(myMap['salon']['rating'].toString()),
               myMap['salon']['total_rating'].toString(),
               myMap['salon']['in_home'].toString(),
-              myMap['salon']['have_shop'].toString(),myMap['salon']['id'].toString());
-
+              myMap['salon']['have_shop'].toString(),
+              myMap['salon']['id'].toString());
         }
         var updateParam = {
           "id": myMap['user']['id'].toString(),
@@ -628,11 +636,13 @@ class LoginController extends GetxController implements GetxService {
         parser.saveToken(myMap['token']);
 
         String subtype = "";
-        if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'salon'){
+        if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'salon') {
           subtype = "Hair & Nails Salon";
-        }else if(myMap['user']['sub_type'].toString() == "null" &&  myMap['user']['type'].toString() == 'individual'){
+        } else if (myMap['user']['sub_type'].toString() == "null" &&
+            myMap['user']['type'].toString() == 'individual') {
           subtype = "Mobile Beautifician";
-        }else{
+        } else {
           subtype = myMap['user']['sub_type'].toString();
         }
 
@@ -646,17 +656,18 @@ class LoginController extends GetxController implements GetxService {
             myMap['user']['type'].toString(),
             subtype);
 
-        print("HelloIndividualId"+ myMap['user']['id'].toString());
+        print("HelloIndividualId" + myMap['user']['id'].toString());
 
         if (myMap['user']['type'].toString() == 'individual') {
           parser.saveOtherInfo(
-
               '${myMap['user']['first_name']} ${myMap['user']['last_name']}',
               myMap['user']['cover'].toString(),
               myMap['individual']['background'].toString(),
               double.parse(myMap['individual']['rating'].toString()),
-              myMap['individual']['total_rating'].toString(), myMap['individual']['in_home'].toString(),
-              myMap['individual']['have_shop'].toString(), myMap['individual']['id'].toString());
+              myMap['individual']['total_rating'].toString(),
+              myMap['individual']['in_home'].toString(),
+              myMap['individual']['have_shop'].toString(),
+              myMap['individual']['id'].toString());
         } else {
           parser.saveOtherInfo(
               myMap['salon']['name'].toString(),

@@ -642,7 +642,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
         padding: EdgeInsets.all(8.0),
-        height: 120,
+        height: 145,
         width: 145,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -681,10 +681,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             //         child:
             Positioned(
               top: 80,
-              child: Text(
-                '$txt',
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 9, fontFamily: 'bold'),
+              child: SizedBox(
+                height: 50,
+                width: 120,
+                child: Text(
+                  '$txt',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textDirection: TextDirection.rtl,
+                  softWrap: true,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(fontSize: 15, fontFamily: 'bold'),
+                ),
               ),
             ),
             //       ),

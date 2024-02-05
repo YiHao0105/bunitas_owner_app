@@ -68,9 +68,19 @@ class SignUpController extends GetxController implements GetxService {
   RxBool isLogin = false.obs;
   String smsName = AppConstants.defaultSMSGateway;
   bool apiCalled = false;
-  String selectedGender = 'Male';
+  String selectedGender = 'Select your gender';
+  String selectedService = "What type of business do you proposed?";
+  String isBusinessRegistered = "Is your business registered ?";
 
-  List<String> genderList = ['Male', 'Female','Other'];
+  List<String> genderList = ['Male', 'Female', 'Other'];
+  List<String> serviceList = [
+    'Hair & Nails Salon',
+    'Mobile Beautician',
+    'Barber Shop',
+    'Wellness & Spa',
+    'Beauty Clinics',
+    'Products Only',
+  ];
 
   List<AddProfileModel> _servedCategoriesList = <AddProfileModel>[];
 
@@ -79,7 +89,6 @@ class SignUpController extends GetxController implements GetxService {
   bool termCondition = false;
   bool ageCondition = false;
   bool personalInformation = false;
-
 
   SignUpController({required this.parser});
 
@@ -125,7 +134,7 @@ class SignUpController extends GetxController implements GetxService {
 
   void updateType(int number) {
     type = number;
-    if (type == 1 || type == 2 || type == 3 || type == 4 || type == 5 ) {
+    if (type == 1 || type == 2 || type == 3 || type == 4 || type == 5) {
       debugPrint('salon');
       name.text = '';
     } else {
@@ -150,7 +159,7 @@ class SignUpController extends GetxController implements GetxService {
     Navigator.of(context).pop(true);
   }
 
-  void selectFromGallery(String kind,String type) async {
+  void selectFromGallery(String kind, String type) async {
     debugPrint(kind);
     final pickedFile = await ImagePicker().pickImage(
         source: kind == 'gallery' ? ImageSource.gallery : ImageSource.camera,
@@ -186,13 +195,13 @@ class SignUpController extends GetxController implements GetxService {
         if (response.body['data'] != null && response.body['data'] != '') {
           dynamic body = response.body["data"];
           if (body['image_name'] != null && body['image_name'] != '') {
-            if(type == "profile"){
+            if (type == "profile") {
               cover = body['image_name'];
-            }else if(type == "card"){
+            } else if (type == "card") {
               cardId.text = pickedFile.name.toString();
               card_id = body['image_name'];
-            }else{
-              beautyCertificate.text =  pickedFile.name.toString();
+            } else {
+              beautyCertificate.text = pickedFile.name.toString();
               quali = body['image_name'];
             }
             debugPrint(cover);
@@ -561,11 +570,9 @@ class SignUpController extends GetxController implements GetxService {
   }
 
   void toggleConfirmPasswordBtn() {
-    confirmPasswordVisible = ! confirmPasswordVisible;
+    confirmPasswordVisible = !confirmPasswordVisible;
     update();
   }
-
-
 
   void saveGender(String gender) {
     selectedGender = gender;
@@ -576,8 +583,9 @@ class SignUpController extends GetxController implements GetxService {
     LocationPermission permission;
     permission = await Geolocator.requestPermission();
 
-    if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
-        position = await Geolocator.getCurrentPosition(
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.low);
       print(position!.latitude.toString());
       print(position?.longitude);
@@ -641,13 +649,11 @@ class SignUpController extends GetxController implements GetxService {
         // lng.text == '' ||
         // lng.text.isEmpty ||
         name.text == '' ||
-        name.text.isEmpty||
+        name.text.isEmpty ||
         dateInput.text == '' ||
-        dateInput.text.isEmpty||
+        dateInput.text.isEmpty ||
         cardId.text == '' ||
-        cardId.text.isEmpty
-
-    ) {
+        cardId.text.isEmpty) {
       showToast('All fields are required'.tr);
       return;
     }
@@ -663,11 +669,11 @@ class SignUpController extends GetxController implements GetxService {
       showToast("password does not match".tr);
       return;
     }
-    if(!isAdult(DateFormat('dd/MM/yyyy').parse(dateInput.text.toString()))){
+    if (!isAdult(DateFormat('dd/MM/yyyy').parse(dateInput.text.toString()))) {
       showToast("Age must be more than 18 year old".tr);
       return;
     }
-    if(!termCondition || !ageCondition){
+    if (!termCondition || !ageCondition) {
       showToast("Please accept terms & conditions".tr);
       return;
     }
@@ -713,7 +719,7 @@ class SignUpController extends GetxController implements GetxService {
       "categories": savedList.join(','),
       "lat": position!.latitude.toString(),
       "lng": position!.longitude.toString(),
-      "fee_start":"0",
+      "fee_start": "0",
       "about": descriptionsTextEditor.text,
       "cid": selectedCity.id.toString(),
       "zipcode": zipcode.text,
@@ -722,25 +728,29 @@ class SignUpController extends GetxController implements GetxService {
       "status": 0,
       "cover": cover,
       "gender": selectedGender == 'Male' ? 1 : 0,
-      // "type": type == 1 ? 'salon'
-      //       : type == 2 ? "barber"
-      //       : type == 3 ? "wellness"
-      //       : type == 4 ? "beauty"
-      //       : type == 5 ? "product"
-      //       :'individual',
-      "type": type == 1 ? 'Hair & Nails Salon'
-          : type == 2 ? "Barber Shop"
-          : type == 3 ? "Wellness & Spa"
-          : type == 4 ? "Beauty Clinics"
-          : type == 5 ? "Products Only"
-          :'Mobile Beautician',
+      ""
+          // "type": type == 1 ? 'salon'
+          //       : type == 2 ? "barber"
+          //       : type == 3 ? "wellness"
+          //       : type == 4 ? "beauty"
+          //       : type == 5 ? "product"
+          //       :'individual',
+          "type": type == 1
+          ? 'Hair & Nails Salon'
+          : type == 2
+              ? "Barber Shop"
+              : type == 3
+                  ? "Wellness & Spa"
+                  : type == 4
+                      ? "Beauty Clinics"
+                      : type == 5
+                          ? "Products Only"
+                          : 'Mobile Beautician',
       "name": name.text,
-      "id_card":card_id,
-      "qualification":quali,
-      "dob":convertDate(dateInput.text.toString())
+      "id_card": card_id,
+      "qualification": quali,
+      "dob": convertDate(dateInput.text.toString())
     };
-
-
 
     var response = await parser.saveMyRequest(body);
     Get.back();
@@ -765,12 +775,10 @@ class SignUpController extends GetxController implements GetxService {
                   )
                 ],
               ));
-    }
-    else if (response.statusCode == 401) {
+    } else if (response.statusCode == 401) {
       showToast('Something went wrong while signup'.tr);
       update();
-    }
-    else if (response.statusCode == 500) {
+    } else if (response.statusCode == 500) {
       Map<String, dynamic> myMap = Map<String, dynamic>.from(response.body);
       if (myMap['message'] != '') {
         showToast(myMap['message'.tr]);
@@ -778,17 +786,12 @@ class SignUpController extends GetxController implements GetxService {
         showToast('Something went wrong'.tr);
       }
       update();
-    }
-    else {
+    } else {
       ApiChecker.checkApi(response);
       update();
     }
     update();
-
-
-
   }
-
 
   // DateTime selectedDate = DateTime.now();
   //
@@ -819,7 +822,5 @@ class SignUpController extends GetxController implements GetxService {
     return DateFormat('yyyy-MM-dd').format(dateTime);
   }
 
-  updatetermCondition(){
-
-  }
+  updatetermCondition() {}
 }

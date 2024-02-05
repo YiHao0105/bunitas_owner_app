@@ -68,7 +68,7 @@ class _CitiesCategoriesScreen extends State<CitiesCategoriesScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    'Select Cities'.tr,
+                                    'Select City'.tr,
                                     style: const TextStyle(
                                         color: ThemeProvider.blackColor,
                                         fontSize: 20,

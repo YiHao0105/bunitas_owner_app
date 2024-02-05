@@ -66,10 +66,10 @@ class _AddTimingScreenState extends State<AddTimingScreen> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'Add Timing'.tr,
+                                'Add Opening Date/Hour'.tr,
                                 style: const TextStyle(
                                     color: ThemeProvider.blackColor,
-                                    fontSize: 20,
+                                    fontSize: 18,
                                     fontFamily: 'bold'),
                               ),
                             ),
