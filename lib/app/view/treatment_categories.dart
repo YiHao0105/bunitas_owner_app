@@ -16,15 +16,12 @@ import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
 class TreatmentCategoriesScreen extends StatefulWidget {
   const TreatmentCategoriesScreen({Key? key}) : super(key: key);
 
-
   @override
-  State<TreatmentCategoriesScreen> createState() => _TreatmentCategoriesScreen();
+  State<TreatmentCategoriesScreen> createState() =>
+      _TreatmentCategoriesScreen();
 }
 
-
-
 class _TreatmentCategoriesScreen extends State<TreatmentCategoriesScreen> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -38,54 +35,115 @@ class _TreatmentCategoriesScreen extends State<TreatmentCategoriesScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: 50,
-            title: Text(
-              'Select Treatment'.tr,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.start,
-              style: ThemeProvider.titleStyle,
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   centerTitle: true,
+          //   elevation: 0,
+          //   toolbarHeight: 50,
+          //   title: Text(
+          //     'Select Treatment'.tr,
+          //     overflow: TextOverflow.ellipsis,
+          //     textAlign: TextAlign.start,
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          // ),
           body: value.apiCalled == false
               ? SkeletonListView()
-              : SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: value.selectTreatmentList.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) => Column(
-                      children: [
-                        ListTile(
-                          visualDensity:
-                          const VisualDensity(vertical: -4),
-                          horizontalTitleGap: 0,
-                          leading: Radio(
-                            activeColor: ThemeProvider.appColor,
-                            value: value.selectTreatmentList[i].id.toString(),
-                            groupValue: value.selectedTreatment,
-                            onChanged: (data) {
-                              value.saveTreatment(data.toString());
-                            },
+              : Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 25),
+                      height: 125.0,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              ThemeProvider.whiteColor,
+                              Colors.deepPurple.shade50
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
                           ),
-                          title:
-                          Text(value.selectTreatmentList[i].name.toString()),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: Stack(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Select Treatment'.tr,
+                                    style: const TextStyle(
+                                        color: ThemeProvider.blackColor,
+                                        fontSize: 20,
+                                        fontFamily: 'bold'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: ThemeProvider.whiteColor),
+                                      child: IconButton(
+                                        icon: Icon(Icons.arrow_back),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                            padding: EdgeInsets.zero,
+                            itemCount: value.selectTreatmentList.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, i) => Column(
+                              children: [
+                                ListTile(
+                                  visualDensity:
+                                      const VisualDensity(vertical: -4),
+                                  horizontalTitleGap: 0,
+                                  leading: Radio(
+                                    activeColor: ThemeProvider.appColor,
+                                    value: value.selectTreatmentList[i].id
+                                        .toString(),
+                                    groupValue: value.selectedTreatment,
+                                    onChanged: (data) {
+                                      value.saveTreatment(data.toString());
+                                    },
+                                  ),
+                                  title: Text(value.selectTreatmentList[i].name
+                                      .toString()),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
           bottomNavigationBar: SizedBox(
             height: 70,
             child: Row(

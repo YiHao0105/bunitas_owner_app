@@ -26,141 +26,196 @@ class _PolicyScreenState extends State<PolicyScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: 50,
-            title: Text(
-              'Policy'.tr,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.start,
-              style: ThemeProvider.titleStyle,
-            ),
-          ),
-          body: Stack(
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   centerTitle: true,
+          //   elevation: 0,
+          //   toolbarHeight: 50,
+          //   title: Text(
+          //     'Policy'.tr,
+          //     overflow: TextOverflow.ellipsis,
+          //     textAlign: TextAlign.start,
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          // ),
+          body: Column(
             children: [
-              Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Column(
+              Container(
+                padding: EdgeInsets.only(top: 25),
+                height: 125.0,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        ThemeProvider.whiteColor,
+                        Colors.deepPurple.shade50
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30))),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 12.0),
+                  child: Stack(
                     children: [
-                      Text(
-                        'Write your cancellation/Late/No-show/Reschedule Policy.'
-                            .tr,
-                        style: const TextStyle(fontFamily: 'bold', fontSize: 14),
-                      ),
-
-                      Padding(padding: EdgeInsets.symmetric(vertical: 10),
-                        child: Container(
-                          height: 300,
-                          child: TextField(
-
-                            style: TextStyle(color: ThemeProvider.blackColor),
-                            // enabled:  value.content =="null"?true:false,
-                            keyboardType: TextInputType.multiline,
-                            textInputAction: TextInputAction.newline,
-                            // textInputAction: TextInputAction.done,
-                            minLines: 10,
-                            controller: value.policyTextEditor,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              filled: true,
-                              disabledBorder: const OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: ThemeProvider.greyColor)),
-                              fillColor: ThemeProvider.whiteColor,
-                              hintText: 'Description'.tr,
-                              contentPadding: const EdgeInsets.only(
-                                  bottom: 8.0, top: 14.0, left: 10),
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: ThemeProvider.appColor),
-                              ),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide:
-                                  BorderSide(color: ThemeProvider.greyColor)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Policy'.tr,
+                              style: const TextStyle(
+                                  color: ThemeProvider.blackColor,
+                                  fontSize: 20,
+                                  fontFamily: 'bold'),
                             ),
                           ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: ThemeProvider.whiteColor),
+                                child: IconButton(
+                                  icon: Icon(Icons.arrow_back),
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                )),
+                          ],
                         ),
                       ),
-
-
                     ],
-                  )),
-              Align(
-                alignment: Alignment.bottomCenter,
-
-                  child: SizedBox(
-                      width: double.infinity,
-                      child: Visibility(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 13.0),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(100.0),
-                                ),
-                                color: ThemeProvider.greenColor,
-                              ),
-                              child: InkWell(
-                                onTap: () {
-                                  value.onSubmit();
-                                },
-                                child : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-
-                                  children: [
-                                    Text(
-                                      'SUBMIT'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.whiteColor, fontSize: 17),
-                                    ),
-                                  ],
-                                ),
-                              )
-                          ),
-                        ),
-                      ),
                   ),
-
+                ),
               ),
-
+              Stack(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Write your cancellation/Late/No-show/Reschedule Policy.'
+                                .tr,
+                            style: const TextStyle(
+                                fontFamily: 'bold', fontSize: 14),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10),
+                            child: Container(
+                              height: 300,
+                              child: TextField(
+                                style:
+                                    TextStyle(color: ThemeProvider.blackColor),
+                                // enabled:  value.content =="null"?true:false,
+                                keyboardType: TextInputType.multiline,
+                                textInputAction: TextInputAction.newline,
+                                // textInputAction: TextInputAction.done,
+                                minLines: 10,
+                                controller: value.policyTextEditor,
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  disabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ThemeProvider.greyColor)),
+                                  fillColor: ThemeProvider.whiteColor,
+                                  hintText: 'Description'.tr,
+                                  contentPadding: const EdgeInsets.only(
+                                      bottom: 8.0, top: 14.0, left: 10),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: ThemeProvider.appColor),
+                                  ),
+                                  enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ThemeProvider.greyColor)),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: SizedBox(
+                  //     width: double.infinity,
+                  //     child: Visibility(
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.symmetric(
+                  //             vertical: 10, horizontal: 10),
+                  //         child: Container(
+                  //             width: double.infinity,
+                  //             padding:
+                  //                 const EdgeInsets.symmetric(vertical: 13.0),
+                  //             decoration: const BoxDecoration(
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(100.0),
+                  //               ),
+                  //               color: ThemeProvider.greenColor,
+                  //             ),
+                  //             child: InkWell(
+                  //               onTap: () {
+                  //                 value.onSubmit();
+                  //               },
+                  //               child: Row(
+                  //                 mainAxisAlignment: MainAxisAlignment.center,
+                  //                 children: [
+                  //                   Text(
+                  //                     'SUBMIT'.tr,
+                  //                     style: const TextStyle(
+                  //                         color: ThemeProvider.whiteColor,
+                  //                         fontSize: 17),
+                  //                   ),
+                  //                 ],
+                  //               ),
+                  //             )),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
             ],
-
           ),
-         /* bottomNavigationBar: Visibility(
+          bottomNavigationBar: Visibility(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 13.0),
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(100.0),
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 13.0),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100.0),
+                    ),
+                    color: ThemeProvider.greenColor,
                   ),
-                  color: ThemeProvider.greenColor,
-                ),
-                child: InkWell(
-                onTap: () {
-                        value.onSubmit();
-                  },
-                  child : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    children: [
-                      Text(
-                        'SUBMIT'.tr,
-                        style: const TextStyle(
-                            color: ThemeProvider.whiteColor, fontSize: 17),
-                      ),
-                    ],
-                  ),
-                )
-              ),
+                  child: InkWell(
+                    onTap: () {
+                      value.onSubmit();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'SUBMIT'.tr,
+                          style: const TextStyle(
+                              color: ThemeProvider.whiteColor, fontSize: 17),
+                        ),
+                      ],
+                    ),
+                  )),
             ),
-          ),*/
+          ),
         );
       },
     );

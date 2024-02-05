@@ -27,24 +27,84 @@ class _AppPagesScreenState extends State<AppPagesScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.backgroundColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              value.title,
-              style: ThemeProvider.titleStyle,
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   elevation: 0,
+          //   centerTitle: true,
+          //   title: Text(
+          //     value.title,
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          // ),
           body: value.apiCalled == true
-              ? SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Wrap(
-                      children: [Html(data: value.content.toString())],
+              ? Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 25),
+                      height: 125.0,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              ThemeProvider.whiteColor,
+                              Colors.deepPurple.shade50
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: Stack(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    value.title.tr,
+                                    style: const TextStyle(
+                                        color: ThemeProvider.blackColor,
+                                        fontSize: 20,
+                                        fontFamily: 'bold'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: ThemeProvider.whiteColor),
+                                      child: IconButton(
+                                        icon: Icon(Icons.arrow_back),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Wrap(
+                        children: [Html(data: value.content.toString())],
+                      ),
+                    ),
+                  ],
                 )
               : buildDummy(),
         );

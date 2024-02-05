@@ -12,6 +12,7 @@ import 'package:ultimate_salon_owner_flutter/app/controller/login_controller.dar
 import 'package:ultimate_salon_owner_flutter/app/util/constance.dart';
 import 'package:ultimate_salon_owner_flutter/app/util/theme.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:ultimate_salon_owner_flutter/app/view/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -73,274 +74,142 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
-                height: 450,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: const BoxDecoration(
-                  color: ThemeProvider.whiteColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                  height: 500,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  decoration: const BoxDecoration(
+                    color: ThemeProvider.whiteColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                    ),
                   ),
-                ),
-                child: value.loginVersion == 0
-                    ? Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Welcome'.tr,
-                                  style: const TextStyle(
-                                      color: ThemeProvider.blackColor,
-                                      fontSize: 17),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Login With Your Account'.tr,
-                                  style: const TextStyle(
-                                      color: ThemeProvider.greyColor,
-                                      fontSize: 13),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: TextField(
-                                controller: value.emailTextEditor,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: ThemeProvider.whiteColor,
-                                  hintText: 'Email ID'.tr,
-                                  hintStyle: const TextStyle(
-                                      color: ThemeProvider.greyColor,
-                                      fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(
-                                      bottom: 8.0, top: 14.0, left: 20),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                        color: ThemeProvider.appColor),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(100),
-                                      borderSide: const BorderSide(
-                                          color: ThemeProvider.appColor)),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            child: SizedBox(
-                              width: double.infinity,
-                              child: TextField(
-                                controller: value.passwordTextEditor,
-                                obscureText: value.passwordVisible.value == true
-                                    ? false
-                                    : true,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: ThemeProvider.whiteColor,
-                                  suffixIcon: InkWell(
-                                    onTap: () {
-                                      value.togglePassword();
-                                    },
-                                    child: Icon(
-                                      value.passwordVisible.value == false
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      color: ThemeProvider.appColor,
-                                    ),
-                                  ),
-                                  hintText: 'Password'.tr,
-                                  hintStyle: const TextStyle(
-                                      color: ThemeProvider.greyColor,
-                                      fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(
-                                      bottom: 8.0,
-                                      top: 14.0,
-                                      left: 20,
-                                      right: 20),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    borderSide: const BorderSide(
-                                        color: ThemeProvider.appColor),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(100),
-                                      borderSide: const BorderSide(
-                                          color: ThemeProvider.appColor)),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    value.onForgot();
-                                  },
-                                  child: Text(
-                                    'Forgot Password?'.tr,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.blackColor,
-                                        fontSize: 13),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: InkWell(
-                              onTap: () {
-                                value.onLogin();
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 13.0),
-                                decoration: contentButtonStyle(),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'LOG IN'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.whiteColor,
-                                          fontSize: 17),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    value.onSignUp();
-                                  },
-                                  child: Text(
-                                    "Don't have an Account? Sign Up".tr,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 13),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Log In Using",
+                          style: TextStyle(
+                              fontSize: 16, color: ThemeProvider.greyColor),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 3, horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: ThemeProvider.whiteColor,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15.0),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.deepPurple.withOpacity(0.1),
+                              offset: const Offset(0, 0),
+                              blurRadius: 5),
                         ],
-                      )
-                    : value.loginVersion == 1
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: DropdownButton<String>(
+                          hint: Text(
+                            value.loginType,
+                            style: TextStyle(
+                                fontSize: 15, color: ThemeProvider.greyColor),
+                          ),
+                          // icon: Icon(Icons.arrow_downward)
+                          underline: const SizedBox(),
+                          isExpanded: true,
+                          iconSize: 24,
+
+                          style: TextStyle(color: Colors.deepPurple),
+                          iconDisabledColor: ThemeProvider.appColor,
+                          iconEnabledColor: ThemeProvider.appColor,
+                          onChanged: (newValue) {
+                            value.loginType = newValue.toString();
+                            if (value.loginType == "Phone Number") {
+                              value.loginVersion = 1;
+                            } else if (value.loginType == "Email Address") {
+                              value.loginVersion = 0;
+                            }
+                            value.update();
+                          },
+                          items: <String>['Phone Number', 'Email Address']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    value.loginVersion == 0
                         ? Column(
                             children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(top: 30),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         'Welcome'.tr,
+                              //         style: const TextStyle(
+                              //             color: ThemeProvider.blackColor,
+                              //             fontSize: 17),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              // Padding(
+                              //   padding:
+                              //       const EdgeInsets.symmetric(vertical: 10),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         'Login With Your Account'.tr,
+                              //         style: const TextStyle(
+                              //             color: ThemeProvider.greyColor,
+                              //             fontSize: 13),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 30),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Welcome'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.blackColor,
-                                          fontSize: 17),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: TextFormField(
+                                  controller: value.emailTextEditor,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                    labelText: 'Email Address'.tr,
+                                    filled: true,
+                                    fillColor: ThemeProvider.whiteColor,
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 8.0, top: 14.0),
+                                    focusedBorder: const UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ThemeProvider.appColor),
                                     ),
-                                  ],
+                                    enabledBorder: const UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.grey)),
+                                  ),
                                 ),
                               ),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Login With Your Account'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.greyColor,
-                                          fontSize: 13),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        flex: 1,
-                                        child: CountryCodePicker(
-                                          onChanged: (e) =>
-                                              value.updateCountryCode(
-                                                  e.dialCode.toString()),
-                                          initialSelection: 'GB',
-                                          favorite: const ['+44', 'GB'],
-                                          showCountryOnly: false,
-                                          showOnlyCountryWhenClosed: false,
-                                          alignLeft: false,
-                                        )),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
-                                        child: TextFormField(
-                                          controller: value.mobileNo,
-                                          textInputAction: TextInputAction.next,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: ThemeProvider.whiteColor,
-                                            labelText: 'Mobile Number'.tr,
-                                            hintStyle: const TextStyle(
-                                                color: ThemeProvider.greyColor,
-                                                fontSize: 12),
-                                            contentPadding:
-                                                const EdgeInsets.only(
-                                                    bottom: 8.0,
-                                                    top: 14.0,
-                                                    left: 20),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      ThemeProvider.appColor),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                borderSide: const BorderSide(
-                                                    color: ThemeProvider
-                                                        .appColor)),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
                                 child: SizedBox(
                                   width: double.infinity,
                                   child: TextField(
@@ -364,26 +233,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                           color: ThemeProvider.appColor,
                                         ),
                                       ),
-                                      hintText: 'Password'.tr,
-                                      hintStyle: const TextStyle(
-                                          color: ThemeProvider.greyColor,
-                                          fontSize: 12),
+                                      labelText: 'Password'.tr,
                                       contentPadding: const EdgeInsets.only(
-                                          bottom: 8.0,
-                                          top: 14.0,
-                                          left: 20,
-                                          right: 20),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        borderSide: const BorderSide(
+                                          bottom: 8.0, top: 14.0),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
                                             color: ThemeProvider.appColor),
                                       ),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          borderSide: const BorderSide(
-                                              color: ThemeProvider.appColor)),
+                                      enabledBorder: const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.grey)),
                                     ),
                                   ),
                                 ),
@@ -392,7 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 10),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     InkWell(
                                       onTap: () {
@@ -401,7 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       child: Text(
                                         'Forgot Password?'.tr,
                                         style: const TextStyle(
-                                            color: ThemeProvider.blackColor,
+                                            color: ThemeProvider.appColor,
                                             fontSize: 13),
                                       ),
                                     ),
@@ -413,13 +272,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: InkWell(
                                   onTap: () {
-                                    value.loginWithPhonePassword();
+                                    value.onLogin();
                                   },
                                   child: Container(
                                     width: double.infinity,
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 13.0),
-                                    decoration: contentButtonStyle(),
+                                    decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15.0),
+                                        ),
+                                        color: ThemeProvider.appColor),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -428,7 +291,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           'LOG IN'.tr,
                                           style: const TextStyle(
                                               color: ThemeProvider.whiteColor,
-                                              fontSize: 17),
+                                              fontSize: 17,
+                                              fontFamily: 'bold'),
                                         ),
                                       ],
                                     ),
@@ -440,15 +304,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+                                    Text(
+                                      "Don't have account ?".tr,
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
                                     InkWell(
                                       onTap: () {
                                         value.onSignUp();
                                       },
                                       child: Text(
-                                        "Don't have an Account? Sign Up".tr,
+                                        "Sign Up".tr,
                                         style: const TextStyle(
-                                            color: ThemeProvider.greyColor,
-                                            fontSize: 13),
+                                            color: ThemeProvider.appColor,
+                                            fontFamily: 'bold',
+                                            fontSize: 14),
                                       ),
                                     ),
                                   ],
@@ -456,162 +328,558 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           )
-                        : Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 30),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Welcome'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.blackColor,
-                                          fontSize: 17),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Login With Your Account'.tr,
-                                      style: const TextStyle(
-                                          color: ThemeProvider.greyColor,
-                                          fontSize: 13),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        flex: 1,
-                                        child: CountryCodePicker(
-                                          onChanged: (e) =>
-                                              value.updateCountryCode(
-                                                  e.dialCode.toString()),
-                                          initialSelection: 'IN',
-                                          favorite: const ['+91', 'IN'],
-                                          showCountryOnly: false,
-                                          showOnlyCountryWhenClosed: false,
-                                          alignLeft: false,
-                                        )),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 5),
-                                        child: TextFormField(
-                                          controller: value.mobileNo,
-                                          textInputAction: TextInputAction.next,
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                            filled: true,
-                                            fillColor: ThemeProvider.whiteColor,
-                                            labelText: 'Mobile Number'.tr,
-                                            hintStyle: const TextStyle(
-                                                color: ThemeProvider.greyColor,
-                                                fontSize: 12),
-                                            contentPadding:
-                                                const EdgeInsets.only(
-                                                    bottom: 8.0,
-                                                    top: 14.0,
-                                                    left: 20),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              borderSide: const BorderSide(
-                                                  color:
-                                                      ThemeProvider.appColor),
+
+                        // ? Column(
+                        //     children: [
+                        //       Padding(
+                        //         padding: const EdgeInsets.only(top: 30),
+                        //         child: Row(
+                        //           children: [
+                        //             Text(
+                        //               'Welcome'.tr,
+                        //               style: const TextStyle(
+                        //                   color: ThemeProvider.blackColor,
+                        //                   fontSize: 17),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.symmetric(vertical: 10),
+                        //         child: Row(
+                        //           children: [
+                        //             Text(
+                        //               'Login With Your Account'.tr,
+                        //               style: const TextStyle(
+                        //                   color: ThemeProvider.greyColor,
+                        //                   fontSize: 13),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.symmetric(vertical: 5),
+                        //         child: SizedBox(
+                        //           width: double.infinity,
+                        //           child: TextField(
+                        //             controller: value.emailTextEditor,
+                        //             decoration: InputDecoration(
+                        //               filled: true,
+                        //               fillColor: ThemeProvider.whiteColor,
+                        //               hintText: 'Email ID'.tr,
+                        //               hintStyle: const TextStyle(
+                        //                   color: ThemeProvider.greyColor,
+                        //                   fontSize: 12),
+                        //               contentPadding: const EdgeInsets.only(
+                        //                   bottom: 8.0, top: 14.0, left: 20),
+                        //               focusedBorder: OutlineInputBorder(
+                        //                 borderRadius: BorderRadius.circular(100),
+                        //                 borderSide: const BorderSide(
+                        //                     color: ThemeProvider.appColor),
+                        //               ),
+                        //               enabledBorder: OutlineInputBorder(
+                        //                   borderRadius: BorderRadius.circular(100),
+                        //                   borderSide: const BorderSide(
+                        //                       color: ThemeProvider.appColor)),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.symmetric(vertical: 5),
+                        //         child: SizedBox(
+                        //           width: double.infinity,
+                        //           child: TextField(
+                        //             controller: value.passwordTextEditor,
+                        //             obscureText: value.passwordVisible.value == true
+                        //                 ? false
+                        //                 : true,
+                        //             decoration: InputDecoration(
+                        //               filled: true,
+                        //               fillColor: ThemeProvider.whiteColor,
+                        //               suffixIcon: InkWell(
+                        //                 onTap: () {
+                        //                   value.togglePassword();
+                        //                 },
+                        //                 child: Icon(
+                        //                   value.passwordVisible.value == false
+                        //                       ? Icons.visibility
+                        //                       : Icons.visibility_off,
+                        //                   color: ThemeProvider.appColor,
+                        //                 ),
+                        //               ),
+                        //               hintText: 'Password'.tr,
+                        //               hintStyle: const TextStyle(
+                        //                   color: ThemeProvider.greyColor,
+                        //                   fontSize: 12),
+                        //               contentPadding: const EdgeInsets.only(
+                        //                   bottom: 8.0,
+                        //                   top: 14.0,
+                        //                   left: 20,
+                        //                   right: 20),
+                        //               focusedBorder: OutlineInputBorder(
+                        //                 borderRadius: BorderRadius.circular(100),
+                        //                 borderSide: const BorderSide(
+                        //                     color: ThemeProvider.appColor),
+                        //               ),
+                        //               enabledBorder: OutlineInputBorder(
+                        //                   borderRadius: BorderRadius.circular(100),
+                        //                   borderSide: const BorderSide(
+                        //                       color: ThemeProvider.appColor)),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.symmetric(vertical: 10),
+                        //         child: Row(
+                        //           mainAxisAlignment: MainAxisAlignment.center,
+                        //           children: [
+                        //             InkWell(
+                        //               onTap: () {
+                        //                 value.onForgot();
+                        //               },
+                        //               child: Text(
+                        //                 'Forgot Password?'.tr,
+                        //                 style: const TextStyle(
+                        //                     color: ThemeProvider.blackColor,
+                        //                     fontSize: 13),
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.symmetric(vertical: 20),
+                        //         child: InkWell(
+                        //           onTap: () {
+                        //             value.onLogin();
+                        //           },
+                        //           child: Container(
+                        //             width: double.infinity,
+                        //             padding:
+                        //                 const EdgeInsets.symmetric(vertical: 13.0),
+                        //             decoration: const BoxDecoration(
+                        //                 borderRadius: BorderRadius.all(
+                        //                   Radius.circular(15.0),
+                        //                 ),
+                        //                 color: ThemeProvider.appColor),
+                        //             child: Row(
+                        //               mainAxisAlignment: MainAxisAlignment.center,
+                        //               children: [
+                        //                 Text(
+                        //                   'LOG IN'.tr,
+                        //                   style: const TextStyle(
+                        //                       color: ThemeProvider.whiteColor,
+                        //                       fontSize: 17,
+                        //                       fontFamily: 'bold'),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       Padding(
+                        //         padding: const EdgeInsets.only(top: 10),
+                        //         child: Row(
+                        //           mainAxisAlignment: MainAxisAlignment.center,
+                        //           children: [
+                        //             InkWell(
+                        //               onTap: () {
+                        //                 value.onSignUp();
+                        //               },
+                        //               child: Text(
+                        //                 "Don't have an Account? Sign Up".tr,
+                        //                 style: const TextStyle(
+                        //                     color: ThemeProvider.greyColor,
+                        //                     fontSize: 13),
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   )
+                        : value.loginVersion == 1
+                            ? Column(
+                                children: [
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top: 30),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Text(
+                                  //         'Welcome'.tr,
+                                  //         style: const TextStyle(
+                                  //             color: ThemeProvider.blackColor,
+                                  //             fontSize: 17),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // Padding(
+                                  //   padding:
+                                  //       const EdgeInsets.symmetric(vertical: 10),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Text(
+                                  //         'Login With Your Account'.tr,
+                                  //         style: const TextStyle(
+                                  //             color: ThemeProvider.greyColor,
+                                  //             fontSize: 13),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                            flex: 1,
+                                            child: CountryCodePicker(
+                                              onChanged: (e) =>
+                                                  value.updateCountryCode(
+                                                      e.dialCode.toString()),
+                                              initialSelection: 'GB',
+                                              favorite: const ['+44', 'GB'],
+                                              showCountryOnly: false,
+                                              showOnlyCountryWhenClosed: false,
+                                              alignLeft: false,
+                                            )),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: TextFormField(
+                                              controller: value.mobileNo,
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              decoration: InputDecoration(
+                                                labelText: 'Phone Number'.tr,
+                                                filled: true,
+                                                fillColor:
+                                                    ThemeProvider.whiteColor,
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 8.0, top: 14.0),
+                                                focusedBorder:
+                                                    const UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: ThemeProvider
+                                                          .appColor),
+                                                ),
+                                                enabledBorder:
+                                                    const UnderlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                            color:
+                                                                Colors.grey)),
+                                              ),
                                             ),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                borderSide: const BorderSide(
-                                                    color: ThemeProvider
-                                                        .appColor)),
                                           ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: TextField(
+                                        textInputAction: TextInputAction.done,
+                                        controller: value.passwordTextEditor,
+                                        obscureText:
+                                            value.passwordVisible.value == true
+                                                ? false
+                                                : true,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: ThemeProvider.whiteColor,
+                                          suffixIcon: InkWell(
+                                            onTap: () {
+                                              value.togglePassword();
+                                            },
+                                            child: Icon(
+                                              value.passwordVisible.value ==
+                                                      false
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: ThemeProvider.appColor,
+                                            ),
+                                          ),
+                                          labelText: 'Password'.tr,
+                                          contentPadding: const EdgeInsets.only(
+                                              bottom: 8.0, top: 14.0),
+                                          focusedBorder:
+                                              const UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: ThemeProvider.appColor),
+                                          ),
+                                          enabledBorder:
+                                              const UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.grey)),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            value.onForgot();
+                                          },
+                                          child: Text(
+                                            'Forgot Password?'.tr,
+                                            style: const TextStyle(
+                                                color: ThemeProvider.appColor,
+                                                fontSize: 13),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20),
+                                    child: InkWell(
                                       onTap: () {
-                                        value.onForgot();
+                                        value.loginWithPhonePassword();
                                       },
-                                      child: Text(
-                                        'Forgot Password?'.tr,
-                                        style: const TextStyle(
-                                            color: ThemeProvider.blackColor,
-                                            fontSize: 13),
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13.0),
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15.0),
+                                            ),
+                                            color: ThemeProvider.appColor),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'LOG IN'.tr,
+                                              style: const TextStyle(
+                                                  color:
+                                                      ThemeProvider.whiteColor,
+                                                  fontSize: 17,
+                                                  fontFamily: 'bold'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                child: InkWell(
-                                  onTap: () {
-                                    value.loginWithPhoneOTP();
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 13.0),
-                                    decoration: contentButtonStyle(),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'LOG IN'.tr,
+                                          "Don't have account ?".tr,
+                                          style: const TextStyle(fontSize: 14),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            value.onSignUp();
+                                          },
+                                          child: Text(
+                                            "Sign Up".tr,
+                                            style: const TextStyle(
+                                                color: ThemeProvider.appColor,
+                                                fontFamily: 'bold',
+                                                fontSize: 14),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 30),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Welcome'.tr,
                                           style: const TextStyle(
-                                              color: ThemeProvider.whiteColor,
+                                              color: ThemeProvider.blackColor,
                                               fontSize: 17),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Login With Your Account'.tr,
+                                          style: const TextStyle(
+                                              color: ThemeProvider.greyColor,
+                                              fontSize: 13),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                            flex: 1,
+                                            child: CountryCodePicker(
+                                              onChanged: (e) =>
+                                                  value.updateCountryCode(
+                                                      e.dialCode.toString()),
+                                              initialSelection: 'IN',
+                                              favorite: const ['+91', 'IN'],
+                                              showCountryOnly: false,
+                                              showOnlyCountryWhenClosed: false,
+                                              alignLeft: false,
+                                            )),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: TextFormField(
+                                              controller: value.mobileNo,
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              decoration: InputDecoration(
+                                                filled: true,
+                                                fillColor:
+                                                    ThemeProvider.whiteColor,
+                                                labelText: 'Mobile Number'.tr,
+                                                hintStyle: const TextStyle(
+                                                    color:
+                                                        ThemeProvider.greyColor,
+                                                    fontSize: 12),
+                                                contentPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 8.0,
+                                                        top: 14.0,
+                                                        left: 20),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  borderSide: const BorderSide(
+                                                      color: ThemeProvider
+                                                          .appColor),
+                                                ),
+                                                enabledBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: ThemeProvider
+                                                                .appColor)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            value.onForgot();
+                                          },
+                                          child: Text(
+                                            'Forgot Password?'.tr,
+                                            style: const TextStyle(
+                                                color: ThemeProvider.blackColor,
+                                                fontSize: 13),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 20),
+                                    child: InkWell(
                                       onTap: () {
-                                        value.onSignUp();
+                                        value.loginWithPhoneOTP();
                                       },
-                                      child: Text(
-                                        "Don't have an Account? Sign Up".tr,
-                                        style: const TextStyle(
-                                            color: ThemeProvider.greyColor,
-                                            fontSize: 13),
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 13.0),
+                                        decoration: contentButtonStyle(),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'LOG IN'.tr,
+                                              style: const TextStyle(
+                                                  color:
+                                                      ThemeProvider.whiteColor,
+                                                  fontSize: 17),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            value.onSignUp();
+                                          },
+                                          child: Text(
+                                            "Don't have an Account? Sign Up".tr,
+                                            style: const TextStyle(
+                                                color: ThemeProvider.greyColor,
+                                                fontSize: 13),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-              ),
+                  ])),
             ),
           ),
         ],

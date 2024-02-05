@@ -46,15 +46,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _routing() {
     Get.find<SplashController>().getConfigData().then((isSuccess) {
-
-
       if (isSuccess) {
-        if (Get.find<SplashController>().getLanguageCode() != '')
-        {
+        if (Get.find<SplashController>().getLanguageCode() != '') {
           var locale = Get.find<SplashController>().getLanguageCode();
           Get.updateLocale(Locale(locale));
-        }
-        else {
+        } else {
           var locale =
               Get.find<SplashController>().defaultLanguage.languageCode != '' &&
                       Get.find<SplashController>()
@@ -73,7 +69,9 @@ class _SplashScreenState extends State<SplashScreen> {
           Get.offNamed(AppRouter.getTabRoute());
         } else {
           // Get.offNamed(AppRouter.getTabRoute());
-          Get.offNamed(AppRouter.getInitialRoute());
+          Get.offNamed(AppRouter.getIntroSliderPage());
+          // uncomment
+          // Get.offNamed(AppRouter.getInitialRoute());
         }
         // if (Get.find<SplashController>().parser.isNewUser() == false) {
         //   Get.find<SplashController>().parser.saveWelcome(true);
@@ -114,53 +112,84 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(builder: (value) {
       return Scaffold(
-        body: Stack(alignment: AlignmentDirectional.center, children: [
-          const Image(
-            image: AssetImage('assets/images/splash.png'),
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
-            alignment: Alignment.center,
-          ),
-          const Positioned(
-            top: 100,
-            child: Image(
-              image: AssetImage('assets/images/logo_white.png'),
-              fit: BoxFit.cover,
-              height: 50,
-              width: 50,
-              alignment: Alignment.center,
-            ), //CircularAvatar
-          ),
-          const Positioned(
-            top: 180,
-            child: Center(
-              child: Text(
-                Environments.appName,
-                style: TextStyle(
-                    color: ThemeProvider.whiteColor, fontFamily: 'bold'),
-              ),
-            ), //CircularAvatar
-          ),
-          const Positioned(
-            bottom: 50,
-            child: Center(
-              child: CircularProgressIndicator(
-                color: ThemeProvider.whiteColor,
-              ),
-            ), //CircularAvatar
-          ),
-          Positioned(
-            bottom: 20,
-            child: Center(
-              child: Text(
-                'Developed By '.tr + Environments.companyName,
-                style: const TextStyle(
-                    color: ThemeProvider.whiteColor, fontFamily: 'bold'),
+        backgroundColor: ThemeProvider.backgroundColor,
+        body: Stack(
+          children: [
+            const Center(
+              child: Image(
+                image: AssetImage('assets/images/splash.png'),
+                filterQuality: FilterQuality.high,
+                isAntiAlias: true,
+                alignment: Alignment.center,
               ),
             ),
-          ),
-        ]),
+            Positioned(
+              top: 0,
+              left: Get.width - 190,
+              child: const Image(
+                image: AssetImage('assets/images/language_icon_curve.png'),
+                alignment: Alignment.center,
+              ), //CircularAvatar
+            ),
+            Positioned(
+              top: 35,
+              left: Get.width - 100,
+              child: const Image(
+                image: AssetImage('assets/images/select_language.png'),
+                height: 80,
+                width: 80,
+                alignment: Alignment.center,
+              ), //CircularAvatar
+            ),
+          ],
+        ),
+        // Stack(alignment: AlignmentDirectional.center, children: [
+        // const Image(
+        //   image: AssetImage('assets/images/splash.png'),
+        //   fit: BoxFit.cover,
+        //   height: double.infinity,
+        //   width: double.infinity,
+        //   alignment: Alignment.center,
+        // ),
+        // const Positioned(
+        //   top: 100,
+        //   child: Image(
+        //     image: AssetImage('assets/images/logo_white.png'),
+        //     fit: BoxFit.cover,
+        //     height: 50,
+        //     width: 50,
+        //     alignment: Alignment.center,
+        //   ), //CircularAvatar
+        // ),
+        // const Positioned(
+        //   top: 180,
+        //   child: Center(
+        //     child: Text(
+        //       Environments.appName,
+        //       style: TextStyle(
+        //           color: ThemeProvider.whiteColor, fontFamily: 'bold'),
+        //     ),
+        //   ), //CircularAvatar
+        // ),
+        // const Positioned(
+        //   bottom: 50,
+        //   child: Center(
+        //     child: CircularProgressIndicator(
+        //       color: ThemeProvider.whiteColor,
+        //     ),
+        //   ), //CircularAvatar
+        // ),
+        // Positioned(
+        //   bottom: 20,
+        //   child: Center(
+        //     child: Text(
+        //       'Developed By '.tr + Environments.companyName,
+        //       style: const TextStyle(
+        //           color: ThemeProvider.whiteColor, fontFamily: 'bold'),
+        //     ),
+        //   ),
+        // ),
+        // ]),
       );
     });
   }

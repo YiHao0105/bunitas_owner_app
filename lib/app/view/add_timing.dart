@@ -25,114 +25,174 @@ class _AddTimingScreenState extends State<AddTimingScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            centerTitle: true,
-            elevation: 0,
-            toolbarHeight: 50,
-            title: Text(
-              'Add Timing'.tr,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.start,
-              style: ThemeProvider.titleStyle,
-            ),
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   centerTitle: true,
+          //   elevation: 0,
+          //   toolbarHeight: 50,
+          //   title: Text(
+          //     'Add Timing'.tr,
+          //     overflow: TextOverflow.ellipsis,
+          //     textAlign: TextAlign.start,
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          // ),
           body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100.0),
-                      border: Border.all(
-                          color: ThemeProvider.appColor,
-                          style: BorderStyle.solid),
-                    ),
-                    child: DropdownButton<String>(
-                      value: value.dayName,
-                      isExpanded: true,
-                      icon: const Icon(Icons.expand_more),
-                      elevation: 16,
-                      style: const TextStyle(color: ThemeProvider.appColor),
-                      underline: const SizedBox(),
-                      onChanged: (String? newValue) {
-                        debugPrint(newValue);
-                        value.onUpdateDayName(newValue.toString());
-                      },
-                      items: <String>[
-                        'Sunday'.tr,
-                        'Monday'.tr,
-                        'Tuesday'.tr,
-                        'Wednesday'.tr,
-                        'Thursday'.tr,
-                        'Friday'.tr,
-                        'Saturday'.tr
-                      ].map<DropdownMenuItem<String>>((String selected) {
-                        return DropdownMenuItem<String>(
-                          value: selected,
-                          child: Text(selected),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      value.openTimePicker();
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100.0),
-                        border: Border.all(
-                            color: ThemeProvider.appColor,
-                            style: BorderStyle.solid),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          value.openTime == ''
-                              ? Text('Open Time'.tr)
-                              : Text(value.openTime.toString()),
-                          const Icon(Icons.expand_more),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 25),
+                  height: 125.0,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          ThemeProvider.whiteColor,
+                          Colors.deepPurple.shade50
                         ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
                       ),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30),
+                          bottomRight: Radius.circular(30))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Add Opening Date/Hour'.tr,
+                                style: const TextStyle(
+                                    color: ThemeProvider.blackColor,
+                                    fontSize: 18,
+                                    fontFamily: 'bold'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: ThemeProvider.whiteColor),
+                                  child: IconButton(
+                                    icon: Icon(Icons.arrow_back),
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      value.closeTimePicker();
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100.0),
-                        border: Border.all(
-                            color: ThemeProvider.appColor,
-                            style: BorderStyle.solid),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100.0),
+                          border: Border.all(
+                              color: ThemeProvider.appColor,
+                              style: BorderStyle.solid),
+                        ),
+                        child: DropdownButton<String>(
+                          value: value.dayName,
+                          isExpanded: true,
+                          icon: const Icon(Icons.expand_more),
+                          elevation: 16,
+                          style: const TextStyle(color: ThemeProvider.appColor),
+                          underline: const SizedBox(),
+                          onChanged: (String? newValue) {
+                            debugPrint(newValue);
+                            value.onUpdateDayName(newValue.toString());
+                          },
+                          items: <String>[
+                            'Sunday'.tr,
+                            'Monday'.tr,
+                            'Tuesday'.tr,
+                            'Wednesday'.tr,
+                            'Thursday'.tr,
+                            'Friday'.tr,
+                            'Saturday'.tr
+                          ].map<DropdownMenuItem<String>>((String selected) {
+                            return DropdownMenuItem<String>(
+                              value: selected,
+                              child: Text(selected),
+                            );
+                          }).toList(),
+                        ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          value.closeTime == ''
-                              ? Text('Close Time'.tr)
-                              : Text(value.closeTime.toString()),
-                          const Icon(Icons.expand_more),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          value.openTimePicker();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100.0),
+                            border: Border.all(
+                                color: ThemeProvider.appColor,
+                                style: BorderStyle.solid),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              value.openTime == ''
+                                  ? Text('Open Time'.tr)
+                                  : Text(value.openTime.toString()),
+                              const Icon(Icons.expand_more),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: () {
+                          value.closeTimePicker();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 12),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100.0),
+                            border: Border.all(
+                                color: ThemeProvider.appColor,
+                                style: BorderStyle.solid),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              value.closeTime == ''
+                                  ? Text('Close Time'.tr)
+                                  : Text(value.closeTime.toString()),
+                              const Icon(Icons.expand_more),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           bottomNavigationBar: SizedBox(
