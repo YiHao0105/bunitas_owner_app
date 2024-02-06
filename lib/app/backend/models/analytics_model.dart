@@ -6,6 +6,8 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2023-present initappz.
 */
+import 'dart:developer';
+
 import 'package:jiffy/jiffy.dart';
 
 class AnalyticsModel {
@@ -21,6 +23,7 @@ class AnalyticsModel {
     dayName = Jiffy(json['day_name'].toString()).format('EEEE, dd');
     day = Jiffy(json['day'].toString()).yMMMMd;
     total = double.parse(json['total'].toString());
+    // log("total: " + total.toString());
   }
 
   Map<String, dynamic> toJson() {
