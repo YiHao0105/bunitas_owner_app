@@ -420,12 +420,16 @@ class _AnalyticScreenState extends State<AnalyticScreen> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.center,
                                                 children: [
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        value.backYear();
-                                                      },
-                                                      icon: const Icon(
-                                                          Icons.chevron_left)),
+                                                  value.currenyYear < 2025
+                                                      ? SizedBox(
+                                                          width: 45,
+                                                        )
+                                                      : IconButton(
+                                                          onPressed: () {
+                                                            value.backYear();
+                                                          },
+                                                          icon: const Icon(Icons
+                                                              .chevron_left)),
                                                   Text(value.currenyYear
                                                       .toString()),
                                                   IconButton(

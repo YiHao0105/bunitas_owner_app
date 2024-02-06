@@ -6,6 +6,8 @@
   terms found in the Website https://initappz.com/license
   Copyright and Good Faith Purchasers © 2023-present initappz.
 */
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
@@ -168,13 +170,14 @@ class AnalyticsController extends GetxController implements GetxService {
       body.forEach((element) {
         AnalyticsModel data = AnalyticsModel.fromJson(element);
         _list.add(data);
+        _chartTotal.add(data.total!.toDouble());
       });
       if (myMap['success'] == true) {
         debugPrint('ok');
 
-        myMap['chart']['total'].forEach((element) {
-          _chartTotal.add(double.parse(element.toString()));
-        });
+        // myMap['chart']['total'].forEach((element) {
+        // _chartTotal.add(double.parse(element.toString()));
+        // });
 
         double sum = chartTotal.fold(0, (p, c) => p + c);
         double average = sum / chartTotal.length;
@@ -201,16 +204,18 @@ class AnalyticsController extends GetxController implements GetxService {
     if (response.statusCode == 200) {
       Map<String, dynamic> myMap = Map<String, dynamic>.from(response.body);
       dynamic body = myMap["data"];
+
       body.forEach((element) {
         AnalyticsModel data = AnalyticsModel.fromJson(element);
         _listProducts.add(data);
+        _chartTotalProducts.add(data.total!.toDouble());
       });
       if (myMap['success'] == true) {
         debugPrint('ok');
 
-        myMap['chart']['total'].forEach((element) {
-          _chartTotalProducts.add(double.parse(element.toString()));
-        });
+        // myMap['chart']['total'].forEach((element) {
+        //   _chartTotalProducts.add(double.parse(element.toString()));
+        // });
 
         double sum = chartTotalProducts.fold(0, (p, c) => p + c);
         double average = sum / chartTotalProducts.length;
@@ -239,14 +244,15 @@ class AnalyticsController extends GetxController implements GetxService {
       body.forEach((element) {
         MonthAnalyticsModel data = MonthAnalyticsModel.fromJson(element);
         _monthList.add(data);
+        _chartMonthTotal.add(data.total!.toDouble());
       });
       debugPrint('months data');
       debugPrint(monthList.length.toString());
       if (myMap['success'] == true) {
         debugPrint('ok');
-        myMap['chart']['total'].forEach((element) {
-          _chartMonthTotal.add(double.parse(element.toString()));
-        });
+        // myMap['chart']['total'].forEach((element) {
+        //   _chartMonthTotal.add(double.parse(element.toString()));
+        // });
 
         double sum = chartMonthTotal.fold(0, (p, c) => p + c);
         double average = sum / chartMonthTotal.length;
@@ -276,14 +282,15 @@ class AnalyticsController extends GetxController implements GetxService {
       body.forEach((element) {
         MonthAnalyticsModel data = MonthAnalyticsModel.fromJson(element);
         _monthListProducts.add(data);
+        _chartMonthTotalProducts.add(data.total!.toDouble());
       });
       debugPrint('months data');
       debugPrint(monthListProducts.length.toString());
       if (myMap['success'] == true) {
         debugPrint('ok');
-        myMap['chart']['total'].forEach((element) {
-          _chartMonthTotalProducts.add(double.parse(element.toString()));
-        });
+        // myMap['chart']['total'].forEach((element) {
+        //   _chartMonthTotalProducts.add(double.parse(element.toString()));
+        // });
 
         double sum = chartMonthTotalProducts.fold(0, (p, c) => p + c);
         double average = sum / chartMonthTotalProducts.length;
@@ -312,14 +319,15 @@ class AnalyticsController extends GetxController implements GetxService {
       body.forEach((element) {
         YearlyAnalyticsModel data = YearlyAnalyticsModel.fromJson(element);
         _yearlyList.add(data);
+        _chartYearlyTotal.add(data.total!.toDouble());
       });
       debugPrint('months data');
       debugPrint(yearlyList.length.toString());
       if (myMap['success'] == true) {
         debugPrint('ok');
-        myMap['chart']['total'].forEach((element) {
-          _chartYearlyTotal.add(double.parse(element.toString()));
-        });
+        // myMap['chart']['total'].forEach((element) {
+        //   _chartYearlyTotal.add(double.parse(element.toString()));
+        // });
 
         double sum = _chartYearlyTotal.fold(0, (p, c) => p + c);
         double average = sum / _chartYearlyTotal.length;
@@ -348,14 +356,15 @@ class AnalyticsController extends GetxController implements GetxService {
       body.forEach((element) {
         YearlyAnalyticsModel data = YearlyAnalyticsModel.fromJson(element);
         _yearlyListProducts.add(data);
+        _chartYearlyTotalProducts.add(data.total!.toDouble());
       });
       debugPrint('months data');
       debugPrint(yearlyListProducts.length.toString());
       if (myMap['success'] == true) {
-        debugPrint('ok');
-        myMap['chart']['total'].forEach((element) {
-          _chartYearlyTotalProducts.add(double.parse(element.toString()));
-        });
+        // debugPrint('ok');
+        // myMap['chart']['total'].forEach((element) {
+        //   _chartYearlyTotalProducts.add(double.parse(element.toString()));
+        // });
 
         double sum = _chartYearlyTotalProducts.fold(0, (p, c) => p + c);
         double average = sum / _chartYearlyTotalProducts.length;
@@ -491,6 +500,8 @@ class AnalyticsController extends GetxController implements GetxService {
   }
 
   String getNameProducts() {
-    return monthsProducts[monthNameProducts - 1];
+    
+      return monthsProducts[monthNameProducts - 1];
+    
   }
 }
