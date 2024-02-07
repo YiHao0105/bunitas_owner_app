@@ -208,15 +208,16 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                             BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(5),
+                                                                  .circular(30),
                                                           color: ThemeProvider
                                                               .whiteColor,
-                                                          boxShadow: const [
+                                                          boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  ThemeProvider
-                                                                      .greyColor,
-                                                              blurRadius: 5.0,
+                                                              color: ThemeProvider
+                                                                  .appColor
+                                                                  .withOpacity(
+                                                                      0.2),
+                                                              blurRadius: 35.0,
                                                             ),
                                                           ],
                                                         ),
@@ -689,15 +690,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
-                                                                              5),
+                                                                              30),
                                                                   color: ThemeProvider
                                                                       .whiteColor,
-                                                                  boxShadow: const [
+                                                                  boxShadow: [
                                                                     BoxShadow(
                                                                       color: ThemeProvider
-                                                                          .greyColor,
+                                                                          .appColor
+                                                                          .withOpacity(
+                                                                              0.2),
                                                                       blurRadius:
-                                                                          5.0,
+                                                                          35.0,
                                                                     ),
                                                                   ],
                                                                 ),
@@ -770,6 +773,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                                 ),
                                                                                 Text(
                                                                                   "Appointments ID #".tr + value.appointmentListOld[index].id.toString(),
+                                                                                  overflow: TextOverflow.ellipsis,
+                                                                                  style: const TextStyle(fontSize: 12, color: ThemeProvider.blackColor),
+                                                                                ),
+                                                                                Text(
+                                                                                  "Date & Time: ".tr + "${value.appointmentListOld[index].saveDate} ${value.appointmentListOld[index].slot}",
                                                                                   overflow: TextOverflow.ellipsis,
                                                                                   style: const TextStyle(fontSize: 12, color: ThemeProvider.blackColor),
                                                                                 ),
@@ -949,7 +957,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                           ),
                                                                           Text(
                                                                             value.currencySide == 'left'
-                                                                                ? value.currencySymbol + value.appointmentListOld[index].grandTotal.toString()
+                                                                                ? value.currencySymbol +
+                                                                                    (((2.99 + ((value.appointmentListOld[index].grandTotal! - value.appointmentListOld[index].serviceTax!.toDouble() - value.appointmentListOld[index].distanceCost!.toDouble()) * 0.2) + ((value.appointmentListOld[index].grandTotal! - value.appointmentListOld[index].serviceTax!.toDouble() - value.appointmentListOld[index].distanceCost!.toDouble()) * 0.2 * 0.035))) + ((value.appointmentListOld[index].grandTotal! - value.appointmentListOld[index].serviceTax!.toDouble() - value.appointmentListOld[index].distanceCost!.toDouble()) - ((value.appointmentListOld[index].grandTotal! - value.appointmentListOld[index].serviceTax!.toDouble() - value.appointmentListOld[index].distanceCost!.toDouble()) * 0.2))
+                                                                                        // value.appointmentListOld[index].grandTotal!.toDouble()
+                                                                                        )
+                                                                                        .toStringAsFixed(3)
                                                                                 : value.appointmentListOld[index].grandTotal.toString() + value.currencySymbol,
                                                                             style: const TextStyle(
                                                                                 fontSize: 12,
@@ -976,26 +988,26 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                      Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Appointment at :'.tr,
-                                                                            style:
-                                                                                const TextStyle(fontSize: 12, color: ThemeProvider.appColor),
-                                                                          ),
-                                                                          Text(
-                                                                            '${value.appointmentListOld[index].saveDate} ${value.appointmentListOld[index].slot}',
-                                                                            style:
-                                                                                const TextStyle(
-                                                                              fontSize: 12,
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
+                                                                      // Row(
+                                                                      //   mainAxisAlignment:
+                                                                      //       MainAxisAlignment.spaceBetween,
+                                                                      //   crossAxisAlignment:
+                                                                      //       CrossAxisAlignment.center,
+                                                                      //   children: [
+                                                                      //     Text(
+                                                                      //       'Appointment at :'.tr,
+                                                                      //       style:
+                                                                      //           const TextStyle(fontSize: 12, color: ThemeProvider.appColor),
+                                                                      //     ),
+                                                                      //     Text(
+                                                                      //       '${value.appointmentListOld[index].saveDate} ${value.appointmentListOld[index].slot}',
+                                                                      //       style:
+                                                                      //           const TextStyle(
+                                                                      //         fontSize: 12,
+                                                                      //       ),
+                                                                      //     )
+                                                                      //   ],
+                                                                      // ),
                                                                     ],
                                                                   ),
                                                                 ),
