@@ -27,152 +27,591 @@ class _ProductOrderDetailScreenState extends State<ProductOrderDetailScreen> {
       builder: (value) {
         return Scaffold(
           backgroundColor: ThemeProvider.whiteColor,
-          appBar: AppBar(
-            backgroundColor: ThemeProvider.appColor,
-            elevation: 0,
-            iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
-            titleSpacing: 0,
-            title: Text(
-              "Order No #".tr + value.id.toString(),
-              style: ThemeProvider.titleStyle,
-            ),
-            actions: <Widget>[
-              IconButton(
-                  onPressed: () {
-                    value.launchInBrowser();
-                  },
-                  icon: const Icon(Icons.print_outlined)),
-              IconButton(
-                  onPressed: () {
-                    value.openHelpModal();
-                  },
-                  icon: const Icon(Icons.question_mark_outlined))
-            ],
-          ),
+          // appBar: AppBar(
+          //   backgroundColor: ThemeProvider.appColor,
+          //   elevation: 0,
+          //   iconTheme: const IconThemeData(color: ThemeProvider.whiteColor),
+          //   titleSpacing: 0,
+          //   title: Text(
+          //     "Order No #".tr + value.id.toString(),
+          //     style: ThemeProvider.titleStyle,
+          //   ),
+          //   actions: <Widget>[
+          //     IconButton(
+          //         onPressed: () {
+          // value.launchInBrowser();
+          //         },
+          //         icon: const Icon(Icons.print_outlined)),
+          //     IconButton(
+          //         onPressed: () {
+          //           value.openHelpModal();
+          //         },
+          //         icon: const Icon(Icons.question_mark_outlined))
+          //   ],
+          // ),
           body: value.apiCalled == false
               ? const Center(
                   child:
                       CircularProgressIndicator(color: ThemeProvider.appColor),
                 )
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+              : Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 25),
+                      height: 125.0,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              ThemeProvider.whiteColor,
+                              Colors.deepPurple.shade50
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(30),
+                              bottomRight: Radius.circular(30))),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: SizedBox.fromSize(
-                                size: const Size.fromRadius(30),
-                                child: FadeInImage(
-                                  image: NetworkImage(
-                                      '${Environments.apiBaseURL}storage/images/${value.productOrderDetails.userInfo!.cover.toString()}'),
-                                  placeholder: const AssetImage(
-                                      "assets/images/placeholder.jpeg"),
-                                  imageErrorBuilder:
-                                      (context, error, stackTrace) {
-                                    return Image.asset(
-                                      'assets/images/notfound.png',
-                                      fit: BoxFit.cover,
-                                      height: 30,
-                                      width: 30,
-                                    );
-                                  },
-                                  fit: BoxFit.cover,
-                                  height: 30,
-                                  width: 30,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${value.productOrderDetails.userInfo!.firstName} ${value.productOrderDetails.userInfo!.lastName}',
-                                    overflow: TextOverflow.ellipsis,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Order No #".tr + value.id.toString(),
                                     style: const TextStyle(
-                                        fontFamily: 'bold', fontSize: 14),
+                                        color: ThemeProvider.blackColor,
+                                        fontSize: 14,
+                                        fontFamily: 'bold'),
                                   ),
-                                  Text(
-                                    value.productOrderDetails.userInfo!.email
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    value.productOrderDetails.userInfo!.mobile
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, left: 8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: ThemeProvider.whiteColor),
+                                      child: IconButton(
+                                        icon: Icon(Icons.arrow_back),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                      )),
+                                  Wrap(
+                                    spacing: 3,
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeProvider.whiteColor),
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Icons.print_outlined,
+                                            ),
+                                            onPressed: () {
+                                              value.launchInBrowser();
+                                            },
+                                          )),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color: ThemeProvider.whiteColor),
+                                          child: IconButton(
+                                            icon: Icon(
+                                                Icons.question_mark_outlined),
+                                            onPressed: () {
+                                              value.openHelpModal();
+                                            },
+                                          )),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {
-                                value.onContactInfo(
-                                    '${value.productOrderDetails.userInfo!.firstName!} ${value.productOrderDetails.userInfo!.lastName!}',
-                                    value.productOrderDetails.userInfo!.mobile!,
-                                    value.productOrderDetails.userInfo!.email!,
-                                    value.productOrderDetails.userInfo!.id
-                                        .toString());
-                              },
-                              icon: const Icon(Icons.info),
-                              color: ThemeProvider.appColor,
-                            )
                           ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 20),
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SizedBox.fromSize(
+                                  size: const Size.fromRadius(30),
+                                  child: FadeInImage(
+                                    image: NetworkImage(
+                                        '${Environments.apiBaseURL}storage/images/${value.productOrderDetails.userInfo!.cover.toString()}'),
+                                    placeholder: const AssetImage(
+                                        "assets/images/placeholder.jpeg"),
+                                    imageErrorBuilder:
+                                        (context, error, stackTrace) {
+                                      return Image.asset(
+                                        'assets/images/notfound.png',
+                                        fit: BoxFit.cover,
+                                        height: 30,
+                                        width: 30,
+                                      );
+                                    },
+                                    fit: BoxFit.cover,
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
                               Expanded(
-                                child: Text(
-                                  'Delivery Address'.tr,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${value.productOrderDetails.userInfo!.firstName} ${value.productOrderDetails.userInfo!.lastName}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          fontFamily: 'bold', fontSize: 14),
+                                    ),
+                                    Text(
+                                      value.productOrderDetails.userInfo!.email
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      value.productOrderDetails.userInfo!.mobile
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  value.onContactInfo(
+                                      '${value.productOrderDetails.userInfo!.firstName!} ${value.productOrderDetails.userInfo!.lastName!}',
+                                      value.productOrderDetails.userInfo!
+                                          .mobile!,
+                                      value
+                                          .productOrderDetails.userInfo!.email!,
+                                      value.productOrderDetails.userInfo!.id
+                                          .toString());
+                                },
+                                icon: const Icon(Icons.info),
+                                color: ThemeProvider.appColor,
+                              )
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Delivery Address'.tr,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        color: ThemeProvider.appColor,
+                                        fontFamily: 'bold',
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '${value.productOrderDetails.address!.house} ${value.productOrderDetails.address!.address} ${value.productOrderDetails.address!.landmark} ${value.productOrderDetails.address!.pincode}',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        color: ThemeProvider.greyColor,
+                                        fontFamily: 'bold',
+                                        fontSize: 13),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Order Date'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.blackColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.productOrderDetails.createdAt
+                                          .toString(),
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.appColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Orders'.tr,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
                                       color: ThemeProvider.appColor,
                                       fontFamily: 'bold',
                                       fontSize: 15),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  '${value.productOrderDetails.address!.house} ${value.productOrderDetails.address!.address} ${value.productOrderDetails.address!.landmark} ${value.productOrderDetails.address!.pincode}',
+                            children: List.generate(
+                              value.productOrderDetails.orders!.length,
+                              (subIndex) => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                        text: value.productOrderDetails
+                                            .orders![subIndex].name
+                                            .toString(),
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          color: ThemeProvider.blackColor,
+                                          fontFamily: 'regular',
+                                        ),
+                                      ),
+                                      const TextSpan(text: ' '),
+                                      const TextSpan(
+                                        text: 'X',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          color: ThemeProvider.blackColor,
+                                          fontFamily: 'regular',
+                                        ),
+                                      ),
+                                      const TextSpan(text: ' '),
+                                      TextSpan(
+                                        text: value.productOrderDetails
+                                            .orders![subIndex].quantity
+                                            .toString(),
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          color: ThemeProvider.blackColor,
+                                          fontFamily: 'regular',
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: value.currencySide == 'left'
+                                              ? value.currencySymbol +
+                                                  value
+                                                      .productOrderDetails
+                                                      .orders![subIndex]
+                                                      .originalPrice
+                                                      .toString()
+                                              : value
+                                                      .productOrderDetails
+                                                      .orders![subIndex]
+                                                      .originalPrice
+                                                      .toString() +
+                                                  value.currencySymbol,
+                                          style: const TextStyle(
+                                              fontSize: 10,
+                                              color: ThemeProvider.blackColor,
+                                              fontFamily: 'regular',
+                                              decoration:
+                                                  TextDecoration.lineThrough),
+                                        ),
+                                        const TextSpan(text: ' '),
+                                        TextSpan(
+                                          text: value.currencySide == 'left'
+                                              ? value.currencySymbol +
+                                                  value
+                                                      .productOrderDetails
+                                                      .orders![subIndex]
+                                                      .sellPrice
+                                                      .toString()
+                                              : value
+                                                      .productOrderDetails
+                                                      .orders![subIndex]
+                                                      .sellPrice
+                                                      .toString() +
+                                                  value.currencySymbol,
+                                          style: const TextStyle(
+                                              fontSize: 10,
+                                              color: ThemeProvider.blackColor,
+                                              fontFamily: 'regular'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Pricing'.tr,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                      color: ThemeProvider.greyColor,
+                                      color: ThemeProvider.appColor,
                                       fontFamily: 'bold',
-                                      fontSize: 13),
+                                      fontSize: 15),
                                 ),
+                              ],
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Discount'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.currencySide == 'left'
+                                          ? value.currencySymbol +
+                                              value.productOrderDetails.discount
+                                                  .toString()
+                                          : value.productOrderDetails.discount
+                                                  .toString() +
+                                              value.currencySymbol,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Wallet Discount'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.currencySide == 'left'
+                                          ? value.currencySymbol +
+                                              value.productOrderDetails
+                                                  .walletPrice
+                                                  .toString()
+                                          : value.productOrderDetails
+                                                  .walletPrice
+                                                  .toString() +
+                                              value.currencySymbol,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Distance Cost'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.currencySide == 'left'
+                                          ? value.currencySymbol +
+                                              value.productOrderDetails
+                                                  .deliveryCharge
+                                                  .toString()
+                                          : value.productOrderDetails
+                                                  .deliveryCharge
+                                                  .toString() +
+                                              value.currencySymbol,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Service Tax'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.currencySide == 'left'
+                                          ? value.currencySymbol +
+                                              value.productOrderDetails.tax
+                                                  .toString()
+                                          : value.productOrderDetails.tax
+                                                  .toString() +
+                                              value.currencySymbol,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Total'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.currencySide == 'left'
+                                          ? value.currencySymbol +
+                                              value.productOrderDetails.total
+                                                  .toString()
+                                          : value.productOrderDetails.total
+                                                  .toString() +
+                                              value.currencySymbol,
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Payment'.tr,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      value.paymentName[value
+                                          .productOrderDetails
+                                          .paidMethod as int],
+                                      overflow: TextOverflow.ellipsis,
+                                      textAlign: TextAlign.end,
+                                      style: const TextStyle(
+                                          color: ThemeProvider.greyColor,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Column(
-                          children: [
-                            Row(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
                                   child: Text(
-                                    'Order Date'.tr,
+                                    'Total Amount'.tr,
                                     overflow: TextOverflow.ellipsis,
                                     style: const TextStyle(
                                         color: ThemeProvider.blackColor,
@@ -181,360 +620,28 @@ class _ProductOrderDetailScreenState extends State<ProductOrderDetailScreen> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    value.productOrderDetails.createdAt
-                                        .toString(),
+                                    value.currencySide == 'left'
+                                        ? value.currencySymbol +
+                                            value.productOrderDetails.grandTotal
+                                                .toString()
+                                        : value.productOrderDetails.grandTotal
+                                                .toString() +
+                                            value.currencySymbol,
                                     overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.end,
                                     style: const TextStyle(
                                         color: ThemeProvider.appColor,
+                                        fontFamily: 'bold',
                                         fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Orders'.tr,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    color: ThemeProvider.appColor,
-                                    fontFamily: 'bold',
-                                    fontSize: 15),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: List.generate(
-                            value.productOrderDetails.orders!.length,
-                            (subIndex) => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                RichText(
-                                  text: TextSpan(children: [
-                                    TextSpan(
-                                      text: value.productOrderDetails
-                                          .orders![subIndex].name
-                                          .toString(),
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        color: ThemeProvider.blackColor,
-                                        fontFamily: 'regular',
-                                      ),
-                                    ),
-                                    const TextSpan(text: ' '),
-                                    const TextSpan(
-                                      text: 'X',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: ThemeProvider.blackColor,
-                                        fontFamily: 'regular',
-                                      ),
-                                    ),
-                                    const TextSpan(text: ' '),
-                                    TextSpan(
-                                      text: value.productOrderDetails
-                                          .orders![subIndex].quantity
-                                          .toString(),
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        color: ThemeProvider.blackColor,
-                                        fontFamily: 'regular',
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: value.currencySide == 'left'
-                                            ? value.currencySymbol +
-                                                value
-                                                    .productOrderDetails
-                                                    .orders![subIndex]
-                                                    .originalPrice
-                                                    .toString()
-                                            : value
-                                                    .productOrderDetails
-                                                    .orders![subIndex]
-                                                    .originalPrice
-                                                    .toString() +
-                                                value.currencySymbol,
-                                        style: const TextStyle(
-                                            fontSize: 10,
-                                            color: ThemeProvider.blackColor,
-                                            fontFamily: 'regular',
-                                            decoration:
-                                                TextDecoration.lineThrough),
-                                      ),
-                                      const TextSpan(text: ' '),
-                                      TextSpan(
-                                        text: value.currencySide == 'left'
-                                            ? value.currencySymbol +
-                                                value.productOrderDetails
-                                                    .orders![subIndex].sellPrice
-                                                    .toString()
-                                            : value.productOrderDetails
-                                                    .orders![subIndex].sellPrice
-                                                    .toString() +
-                                                value.currencySymbol,
-                                        style: const TextStyle(
-                                            fontSize: 10,
-                                            color: ThemeProvider.blackColor,
-                                            fontFamily: 'regular'),
-                                      ),
-                                    ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Pricing'.tr,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    color: ThemeProvider.appColor,
-                                    fontFamily: 'bold',
-                                    fontSize: 15),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Discount'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.currencySide == 'left'
-                                        ? value.currencySymbol +
-                                            value.productOrderDetails.discount
-                                                .toString()
-                                        : value.productOrderDetails.discount
-                                                .toString() +
-                                            value.currencySymbol,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Wallet Discount'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.currencySide == 'left'
-                                        ? value.currencySymbol +
-                                            value
-                                                .productOrderDetails.walletPrice
-                                                .toString()
-                                        : value.productOrderDetails.walletPrice
-                                                .toString() +
-                                            value.currencySymbol,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Distance Cost'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.currencySide == 'left'
-                                        ? value.currencySymbol +
-                                            value.productOrderDetails
-                                                .deliveryCharge
-                                                .toString()
-                                        : value.productOrderDetails
-                                                .deliveryCharge
-                                                .toString() +
-                                            value.currencySymbol,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Service Tax'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.currencySide == 'left'
-                                        ? value.currencySymbol +
-                                            value.productOrderDetails.tax
-                                                .toString()
-                                        : value.productOrderDetails.tax
-                                                .toString() +
-                                            value.currencySymbol,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Total'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.currencySide == 'left'
-                                        ? value.currencySymbol +
-                                            value.productOrderDetails.total
-                                                .toString()
-                                        : value.productOrderDetails.total
-                                                .toString() +
-                                            value.currencySymbol,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    'Payment'.tr,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    value.paymentName[value
-                                        .productOrderDetails.paidMethod as int],
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.end,
-                                    style: const TextStyle(
-                                        color: ThemeProvider.greyColor,
-                                        fontSize: 15),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Total Amount'.tr,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                      color: ThemeProvider.blackColor,
-                                      fontSize: 15),
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  value.currencySide == 'left'
-                                      ? value.currencySymbol +
-                                          value.productOrderDetails.grandTotal
-                                              .toString()
-                                      : value.productOrderDetails.grandTotal
-                                              .toString() +
-                                          value.currencySymbol,
-                                  overflow: TextOverflow.ellipsis,
-                                  textAlign: TextAlign.end,
-                                  style: const TextStyle(
-                                      color: ThemeProvider.appColor,
-                                      fontFamily: 'bold',
-                                      fontSize: 15),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
           bottomNavigationBar: value.apiCalled == false
               ? const SizedBox()

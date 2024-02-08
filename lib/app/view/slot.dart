@@ -142,9 +142,9 @@ class _SlotScreenState extends State<SlotScreen> {
                       child: ListView(
                         children: [
                           Column(
-                              children: List.generate(
-                            value.slotList.length,
-                            (index) => Column(
+                              children:
+                                  List.generate(value.slotList.length, (index) {
+                            return Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
@@ -491,8 +491,8 @@ class _SlotScreenState extends State<SlotScreen> {
                                                   ),
                                                 ))),
                                   ),
-                                ]),
-                          )),
+                                ]);
+                          })),
                         ],
                       ),
                     ),
